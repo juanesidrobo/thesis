@@ -1,0 +1,41 @@
+# ============================================================
+#  .gitattributes — Atributos de archivos en el repositorio
+# ============================================================
+
+# Normaliza saltos de línea (LF) y evita que Git "arregle" los binarios
+* text=auto
+
+# --- Archivos de texto de la tesis: normalizar LF ---
+*.tex      text
+*.bib      text
+*.md       text
+*.txt      text
+*.sh       text
+*.owl      text
+Makefile   text
+*.mk       text
+
+# --- Iconos de línea final para algunos tipos ---
+*.pdf      binary
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+
+# ------------------------------------------------------------
+#  ARCHIVOS GRANDES / BINARIOS (RENDER 3D, DATA SETS)
+#
+#  Si usas Git LFS, activa las siguientes líneas (descomenta) y
+#  ejecuta "git lfs install" en tu máquina:
+# ------------------------------------------------------------
+# *.blend   filter=lfs diff=lfs merge=lfs -text
+# *.blend1  filter=lfs diff=lfs merge=lfs -text
+# *.fbx     filter=lfs diff=lfs merge=lfs -text
+# *.obj     filter=lfs diff=lfs merge=lfs -text
+# *.stl     filter=lfs diff=lfs merge=lfs -text
+# *.glb     filter=lfs diff=lfs merge=lfs -text
+# *.gltf    filter=lfs diff=lfs merge=lfs -text
+# *.hdr     filter=lfs diff=lfs merge=lfs -text
+# *.csv     filter=lfs diff=lfs merge=lfs -text
+# *.json    filter=lfs diff=lfs merge=lfs -text
+# *.parquet filter=lfs diff=lfs merge=lfs -text

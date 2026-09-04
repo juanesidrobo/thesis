@@ -1,0 +1,25 @@
+% ============================================================
+%  macros.tex — Comandos personalizados de la tesis
+%  Añade aquí tus propios atajos para mantener el texto limpio.
+% ============================================================
+
+% ----- Énfasis / términos técnicos -----
+\newcommand{\tema}[1]{\emph{#1}}
+\newcommand{\codigo}[1]{\texttt{#1}}
+\newcommand{\comando}[1]{\texttt{#1}}
+
+% ----- Comillas tipográficas -----
+\newcommand{\en}[1]{``#1''}
+
+% ----- Referencias cruzadas abreviadas -----
+\newcommand{\figura}[1]{Figura~\ref{#1}}
+\newcommand{\tabla}[1]{Tabla~\ref{#1}}
+\newcommand{\ecuacion}[1]{Ecuación~\eqref{#1}}
+\newcommand{\capitulo}[1]{Capítulo~\ref{#1}}
+
+% ----- Unidades (si no usas siunitx) -----
+\newcommand{\celsius}{\ensuremath{^\circ\text{C}}}
+\newcommand{\porciento}{\ensuremath{\%}}
+
+% ----- Valores con unidades rápidos -----
+\newcommand{\unidad}[2]{#1~\mathrm{#2}}

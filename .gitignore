@@ -1,0 +1,70 @@
+# ============================================================
+#  .gitignore — ignora artefactos de compilación y temporales
+# ============================================================
+
+# ----- Sistema operativo / editores -----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+.obsidian/
+
+# ----- Compilación LaTeX -----
+# Directorio de salida generado por latexmk / Makefile
+documentacion/build/
+build/
+
+# Temporales generados por XeLaTeX / latexmk / biber / makeindex
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.brf
+*.dvi
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.nlo
+*.nls
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.tdo
+*.xdv
+*.vrb
+*.glo
+*.glg
+*.gls
+*.glsdefs
+*.acn
+*.acr
+*.alg
+*.ist
+*.maf
+*.mtc
+*.mtc0
+*.sta
+*.spl
+*.bak
+
+# ----- Blender / modelos 3D (copias de seguridad automáticas) -----
+*.blend1
+*.blend2
+*.blend@
+# NOTA: los archivos fuente pesados (.blend, .fbx, .obj, texturas) se
+# versionan con Git LFS o se guardan fuera del repositorio (ver README).
+
+# ----- Materiales temporales / descargas -----
+*.tmp
+.downloads/

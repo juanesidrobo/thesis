@@ -1,0 +1,31 @@
+# ============================================================
+#  latexmkrc — Configuración de latexmk para XeLaTeX + biber
+#
+#  Permite compilar directamente con:
+#      latexmk main.tex
+#  (sin necesidad de pasar argumentos).
+# ============================================================
+
+# Motor de compilación
+#   1 = pdflatex
+#   5 = xelatex
+#   6 = lualatex
+$pdf_mode = 5;                 # XeLaTeX
+
+# Gestión de la bibliografía
+#   0 = sin bibliografía
+#   1 = bibtex
+#   2 = biber
+$bibtex_use = 2;               # biber (biblatex)
+
+# Directorios de salida (temporales y PDF)
+$out_dir = 'build';
+$aux_dir = 'build';
+
+# Archivo principal por defecto
+@default_files = ('main');
+
+# Limpieza: extensión de los temporales que se borran con "latexmk -C"
+$clean_ext = "%R.aux %R.bbl %R.bcf %R.blg %R.fls %R.idx %R.ilg %R.ind \
+              %R.lof %R.log %R.lot %R.out %R.run.xml %R.toc %R.xdv \
+              %R.synctex.gz %R.vrb %R.nav %R.snm";
