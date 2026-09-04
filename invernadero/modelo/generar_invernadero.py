@@ -377,8 +377,26 @@ def build_scene():
     return scene
 
 
+def compute_normals(mesh):
+    """Garantiza que la malla tenga normales por vértice (sombreado suave).
+
+    Sin esto, el GLB exportado carece del atributo NORMAL y en Blender se ve
+    con sombreado facetado (flat)."""
+    try:
+        if hasattr(mesh, 'vertex_normals') and len(mesh.vertex_normals) == len(mesh.vertices):
+            _ = mesh.vertex_normals  # dispara el cálculo (lazy)
+    except Exception:
+        pass
+    return mesh
+
+
 if __name__ == '__main__':
     scene = build_scene()
+
+    # Calcular normales por malla para que el archivo se vea bien en Blender.
+    for g in scene.geometry.values():
+        compute_normals(g)
+
     out = 'invernadero.glb'
     scene.export(out)
     print(f"✅ Modelo exportado: {out}")

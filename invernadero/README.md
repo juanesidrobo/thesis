@@ -50,16 +50,55 @@ modificarlo y re-renderizarlo en **Blender**, o visualizarlo en visores web.
 `aluminio`, `policarbonato` (translúcido), `terracota`, `suelo`, `tronco`, `hoja`,
 `grava`, `sensor_wh`, `sensor_dk`, `metal`, `conn_green`.
 
+## 📖 Cómo abrir el modelo en Blender
+
+> ⚠️ **Importante:** en Blender un archivo `.glb` **NO se abre con `File > Open`**
+> (eso solo abre archivos `.blend`). Debes **importarlo**:
+> `File > Import > glTF 2.0 (.glb/.gltf)` → selecciona `invernadero.glb`.
+
+La forma más cómoda es usar el script incluido **`modelo/abrir_en_blender.py`**:
+
+**Opción A — desde la interfaz de Blender (recomendada):**
+1. Abre Blender.
+2. Cambia a la pestaña **Scripting** (arriba, junto a Layout/Modeling).
+3. `Text > Open...` → selecciona `modelo/abrir_en_blender.py`.
+4. Pulsa **▶ Run Script** (o `Alt+P`).
+   → El invernadero se importará solo y quedará en la colección *Invernadero*.
+
+**Opción B — terminal:**
+```bash
+blender --background --python abrir_en_blender.py
+```
+
+**Opción C — manual:** `File > Import > glTF 2.0` y elige `invernadero.glb`.
+
+> 💡 Para ver los colores del modelo, pon el *Viewport Shading* en **Material Preview
+> o Rendered**.
+
+### ¿Por qué no abría antes?
+El `.glb` anterior era **glTF 2.0 válido** pero las mallas se exportaron **sin el
+atributo `NORMAL`**, lo que hace que en Blender se vean con sombreado plano/facetado
+y, sobre todo, puede confundir a algunos importadores/configuraciones. Eso se ha
+**corregido**: el archivo actual incluye **normales por vértice** (sombreado suave).
+Además, el paso más habitual de error era intentar `File > Open` en vez de
+`File > Import > glTF 2.0`.
+
 ## 🛠️ Herramientas
 
-- **Blender** para abrir y renderizar `invernadero.glb` (importar → *File > Import > glTF 2.0*).
+- **Blender** para abrir y renderizar `invernadero.glb`.
 - **Blender / 3.js** si se quiere un visor interactivo web.
-- Los scripts `generar_invernadero.py` y `vista_previa.py` regeneran el modelo y la
-  vista previa con **Python** (`numpy`, `trimesh`, `matplotlib`).
+- Los scripts regeneran el modelo y la vista previa con **Python** (`numpy`, `trimesh`, `matplotlib`).
+
+### Scripts de `modelo/`
+| Archivo | Para qué sirve |
+|---|---|
+| `generar_invernadero.py` | Regenera `invernadero.glb` (con normales) desde cero. |
+| `abrir_en_blender.py` | Abre el GLB automáticamente dentro de Blender. |
+| `vista_previa.py` | Genera la vista previa técnica 3D (matplotlib). |
 
 ### Regenerar el modelo (opcional)
 ```bash
-# Desde la carpeta modelo/ (requiere un entorno con numpy, trimesh)
+# Desde la carpeta modelo/ (requiere un entorno con numpy, trimesh, scipy)
 python3 generar_invernadero.py     # escribe invernadero.glb
 python3 vista_previa.py            # escribe ../renders/vista_previa_invernadero.png
 ```
