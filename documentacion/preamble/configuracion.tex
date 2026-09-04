@@ -1,0 +1,35 @@
+% ============================================================
+%  configuracion.tex — Configuración global del documento
+% ============================================================
+
+% ----- Nombres en español -----
+\renewcommand{\chaptername}{Capítulo}
+\renewcommand{\appendixname}{Anexo}
+
+% ----- Profundidad de numeración / índice -----
+\setcounter{tocdepth}{3}   % hasta subsubsección
+\setcounter{secnumdepth}{3}
+
+% ----- Intelineado -----
+\onehalfspacing
+
+% ----- Encabezados y pies de página -----
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small\leftmark}   % capítulo en páginas pares/impares
+\fancyhead[RE,LO]{\small\rightmark}  % sección
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ----- Tablas -----
+\renewcommand{\arraystretch}{1.3}
+\captionsetup{labelfont=bf}
+
+% ----- Espaciado entre párrafos -----
+\setlength{\parskip}{0.5em}
+
+% ----- Numeración de ecuaciones, figuras y tablas por capítulo -----
+\numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}

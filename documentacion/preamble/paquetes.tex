@@ -1,0 +1,46 @@
+% ============================================================
+%  paquetes.tex — Paquetes utilizados en la tesis
+%  Compilación: XeLaTeX + biber (citas IEEE)
+% ============================================================
+
+% ----- Idioma -----
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{csquotes}              % comillas tipográficas (requerido por biblatex)
+
+% ----- Fuentes (XeLaTeX / fontspec) -----
+% TeX Gyre Termes es un clon de Times, estándar en TeX Live y MiKTeX.
+% Para usar "Times New Roman" sustituye por: \setmainfont{Times New Roman}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}      % texto (Times)
+\setsansfont{TeX Gyre Heros}       % sans
+\setmonofont{TeX Gyre Cursor}      % monoespaciada
+
+% ----- Matemáticas -----
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\setmathfont{TeX Gyre Termes Math} % fuentes de matemáticas acordes a Termes
+
+% ----- Figuras, tablas, unidades -----
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% ----- Diseño de página -----
+\usepackage[a4paper,top=3cm,bottom=3cm,left=3.5cm,right=2.5cm,headheight=14pt]{geometry}
+\usepackage{setspace}              % interlineado
+\usepackage{fancyhdr}              % encabezados / pies
+\usepackage{enumitem}              % listas personalizables
+
+% ----- Bibliografía (IEEE + biber) -----
+% sorting=none → numeración por orden de cita (típico de IEEE)
+\usepackage[style=ieee,backend=biber,sorting=none]{biblatex}
+
+% ----- Enlaces / metadatos del PDF (debe ir al final) -----
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}

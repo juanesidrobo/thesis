@@ -1,0 +1,72 @@
+% ============================================================
+%  main.tex — Documento principal de la tesis
+%  Compilación: XeLaTeX + biber   (estilo de citas: IEEE)
+%
+%  Comandos útiles:
+%    make          → compila (genera build/main.pdf)
+%    make watch    → compila en cada cambio
+%    make clean    → limpia temporales
+% ============================================================
+
+% --- Directivas para editores ---
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+% !TEX root = main.tex
+
+\documentclass[12pt,a4paper,twoside,openright]{book}
+
+% --- Paquetes, configuración y macros ---
+\input{preamble/paquetes}
+\input{preamble/configuracion}
+\input{preamble/macros}
+
+% --- Recursos de bibliografía ---
+\addbibresource{bibliografia/referencias.bib}
+
+\begin{document}
+
+% ============================================================
+%  PARTE PRELIMINAR (portada, dedicatoria, resúmenes, índices)
+% ============================================================
+\frontmatter
+
+% --- Metadatos de la tesis (título, autor, tutor, palabras clave…) ---
+\input{contenido/datos_tesis}
+
+\input{contenido/portada}
+\input{contenido/dedicatoria}
+\input{contenido/agradecimientos}
+\input{contenido/resumen}
+\input{contenido/abstract}
+\input{contenido/lista_abreviaturas}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% ============================================================
+%  CUERPO DEL DOCUMENTO (capítulos)
+% ============================================================
+\mainmatter
+
+\input{contenido/capitulos/01_introduccion}
+\input{contenido/capitulos/02_estado_del_arte}
+\input{contenido/capitulos/03_marco_teorico}
+\input{contenido/capitulos/04_metodologia}
+\input{contenido/capitulos/05_desarrollo}
+\input{contenido/capitulos/06_resultados_y_discusion}
+\input{contenido/capitulos/07_conclusiones}
+
+% ============================================================
+%  PARTE FINAL (bibliografía y anexos)
+% ============================================================
+\backmatter
+
+% --- Bibliografía (estilo IEEE, aparece en el índice) ---
+\printbibliography[heading=bibintoc,title={Bibliografía}]
+
+% --- Anexos ---
+\appendix
+\input{contenido/anexos/anexo_a}
+
+\end{document}
