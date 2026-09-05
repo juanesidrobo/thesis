@@ -50,22 +50,28 @@
 \mainmatter
 
 \input{contenido/capitulos/01_introduccion}
-\input{contenido/capitulos/02_estado_del_arte}
-\input{contenido/capitulos/03_marco_teorico}
-\input{contenido/capitulos/04_metodologia}
-\input{contenido/capitulos/05_desarrollo}
-\input{contenido/capitulos/06_resultados_y_discusion}
+\input{contenido/capitulos/02_revision_literatura}
+\input{contenido/capitulos/03_necesidades_monitoreo}
+\input{contenido/capitulos/04_arquitectura_sistema}
+\input{contenido/capitulos/05_pruebas_implementacion_evaluacion}
+\input{contenido/capitulos/06_analisis_resultados}
 \input{contenido/capitulos/07_conclusiones}
 
 % ============================================================
-%  PARTE FINAL (bibliografía y anexos)
+%  PARTE FINAL (destacados, referencias y anexos)
 % ============================================================
-\backmatter
+\input{contenido/destacados}
 
-% --- Bibliografía (estilo IEEE, aparece en el índice) ---
-\printbibliography[heading=bibintoc,title={Bibliografía}]
+% El encabezado permanece visible aunque todavía no haya citas reales.
+\chapter*{REFERENCIAS}
+\markboth{REFERENCIAS}{REFERENCIAS}
+\addcontentsline{toc}{chapter}{REFERENCIAS}
+\printbibliography[heading=none]
 
-% --- Anexos ---
+% No usar backmatter: desactivaría la numeración alfabética de los anexos.
+\chapter*{ANEXOS}
+\markboth{ANEXOS}{ANEXOS}
+\addcontentsline{toc}{chapter}{ANEXOS}
 \appendix
 \input{contenido/anexos/anexo_a}
 

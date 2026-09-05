@@ -3,12 +3,13 @@
 % ============================================================
 
 % ----- Nombres en español -----
-\renewcommand{\chaptername}{Capítulo}
-\renewcommand{\appendixname}{Anexo}
+\addto\captionsspanish{%
+  \renewcommand{\chaptername}{Capítulo}%
+  \renewcommand{\appendixname}{Anexo}}
 
 % ----- Profundidad de numeración / índice -----
-\setcounter{tocdepth}{3}   % hasta subsubsección
-\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}   % hasta subsección (1.1.1)
+\setcounter{secnumdepth}{2}
 
 % ----- Intelineado -----
 \onehalfspacing
@@ -16,8 +17,11 @@
 % ----- Encabezados y pies de página -----
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{\small\leftmark}   % capítulo en páginas pares/impares
-\fancyhead[RE,LO]{\small\rightmark}  % sección
+% El título extenso del capítulo 3 no cabe junto a la marca de sección.
+\fancyhead[LE,RO]{\small\nouppercase{\leftmark}}
+\makeatletter
+\renewcommand{\chaptermark}[1]{\markboth{\@chapapp\ \thechapter}{}}
+\makeatother
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}

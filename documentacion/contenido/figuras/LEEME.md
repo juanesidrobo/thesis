@@ -9,7 +9,7 @@ Coloca aquí las **imágenes, diagramas y gráficos** de la tesis.
 - `.eps` (solo si compilas con `pdflatex`; con XeLaTeX mejor `pdf`)
 
 ### Cómo insertar una figura
-En cualquier capítulo, por ejemplo `contenido/capitulos/05_desarrollo.tex`:
+En cualquier capítulo, por ejemplo `contenido/capitulos/04_arquitectura_sistema.tex`:
 
 ```latex
 \begin{figure}[H]

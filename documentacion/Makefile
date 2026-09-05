@@ -16,7 +16,7 @@ OUTDIR       := build
 JOB          := main
 
 # Opciones de latexmk (motores y salida en build/)
-LATEXMK_OPTS  = -xelatex -pdf -interaction=nonstopmode -halt-on-error \
+LATEXMK_OPTS  = -xelatex -synctex=1 -file-line-error -interaction=nonstopmode -halt-on-error \
                 -outdir=$(OUTDIR) -auxdir=$(OUTDIR)
 
 all: pdf
@@ -32,7 +32,7 @@ pdf:
 	@echo "               open $(OUTDIR)/$(JOB).pdf       (macOS)"
 
 watch:
-	$(LATEXMK) -xelatex -pdf -pvc -interaction=nonstopmode \
+	$(LATEXMK) -xelatex -synctex=1 -file-line-error -pvc -interaction=nonstopmode \
 		-outdir=$(OUTDIR) -auxdir=$(OUTDIR) $(JOB).tex
 
 clean:
