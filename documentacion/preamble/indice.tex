@@ -1,0 +1,21 @@
+% Tabla de contenido con una cabecera por capítulo y páginas automáticas.
+\addto\captionsspanish{\renewcommand{\contentsname}{TABLA DE CONTENIDO}}
+
+\makeatletter
+\newcommand{\l@chaptergroup}[2]{%
+  \addvspace{1em}%
+  \@dottedtocline{0}{0em}{0em}{\bfseries #1}{\bfseries #2}}
+\newcommand{\toclevel@chaptergroup}{0}
+\renewcommand{\l@chapter}[2]{%
+  \@dottedtocline{0}{0em}{1.8em}{\bfseries #1}{\bfseries #2}}
+
+% Conserva la numeración normal de book y sus enlaces; solo añade la
+% cabecera CAPÍTULO N. antes del título numerado en la tabla de contenido.
+\patchcmd{\@chapter}
+  {\addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#1}}
+  {\addcontentsline{toc}{chaptergroup}{\protect\MakeUppercase{\@chapapp}\ \thechapter.}%
+   \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#1}}
+  {}
+  {\PackageError{tesis}{No se pudo configurar la tabla de contenido}%
+    {Comprueba la definicion de chapter en la clase book.}}
+\makeatother

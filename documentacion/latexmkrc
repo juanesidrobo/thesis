@@ -12,11 +12,9 @@
 #   6 = lualatex
 $pdf_mode = 5;                 # XeLaTeX
 
-# Gestión de la bibliografía
-#   0 = sin bibliografía
-#   1 = bibtex
-#   2 = biber
-$bibtex_use = 2;               # biber (biblatex)
+# Procesar la bibliografía cuando sea necesario. El backend biber se detecta
+# mediante el archivo .bcf generado por biblatex; este valor no elige el motor.
+$bibtex_use = 2;
 
 # Directorios de salida (temporales y PDF)
 $out_dir = 'build';

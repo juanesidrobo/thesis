@@ -1,75 +1,96 @@
-# invernadero/
+# Invernadero
 
-Carpeta para el **render / modelo 3D del invernadero** donde se ejecutará y
-desplegará el proyecto de la tesis.
+Ilustración técnica 3D para la tesis, no un plano constructivo ni un diseño
+eléctrico validado. Modelo y seis renders generados y verificados con Blender.
+Esta carpeta contiene únicamente la versión actual.
 
-> ✅ **Estado: AVANZADO.** Ya se generó el modelo 3D editable y el render
-> fotorrealista según la imagen de referencia aportada.
+## Distribución e instrumentación
 
-## 📂 Estructura
+Invernadero de **6 x 14.4 m ilustrativos**, con tres surcos longitudinales de
+diez plantas cada uno: **30 macetas**. Los identificadores van de `S1-P01` a
+`S3-P10`; en cada surco, P01 está junto a la entrada y P10 al fondo.
+La tierra es café casi negro, con textura.
 
-```
-invernadero/
-├── README.md                  ← este archivo
-├── modelo/                    ← modelo 3D y scripts generadores
-│   ├── generar_invernadero.py ← genera el modelo 3D (GLB) proceduralmente
-│   ├── vista_previa.py        → render de vista previa (matplotlib) del GLB
-│   └── invernadero.glb        ← MODELO 3D editable (ábrelo en Blender)
-└── renders/                   ← imágenes de render finales
-    ├── render_invernadero.png        ← render fotorrealista (para la tesis)
-    └── vista_previa_invernadero.png  ← vista previa técnica del modelo
-```
+| Ubicación | Variables | Sensores |
+|---|---|---|
+| Soportes ambientales independientes | Humedad relativa (HR) ambiente y temperatura ambiente | 2 |
+| Parche de suelo al centro | Humedad del suelo general | 1 |
+| S1-P01 | Temperatura de hoja y humedad del sustrato de la maceta | 2 |
+| S2-P05 | Temperatura de hoja y humedad del sustrato de la maceta | 2 |
+| S3-P10 | Temperatura de hoja y humedad del sustrato de la maceta | 2 |
 
-## 🖼️ Renders generados
+**Total: nueve sensores**, seis de ellos locales, exclusivamente en las tres
+plantas indicadas. Las otras 27 plantas no llevan instrumentación.
+La humedad del suelo o sustrato **no es HR del aire**; no se usa el término
+«HR suelo» para estas sondas.
 
-| Archivo | Descripción |
+Una caja Raspberry Pi ocupa una posición lateral a media longitud del
+invernadero. Los **nueve cables continuos** llegan a entradas individuales.
+La placa Raspberry Pi y el bloque de interfaces son esquemáticos: no representan
+cableado eléctrico validado ni una conexión analógica directa a GPIO.
+
+Las entradas de la caja se identifican así: **1 HA** (HR ambiente), **2 TA**
+(temperatura ambiente), **3 HG** (suelo general), **4 A-T**, **5 A-H**,
+**6 B-T**, **7 B-H**, **8 C-T**, **9 C-H**. A, B y C corresponden a las tres
+plantas instrumentadas; T indica temperatura de hoja y H humedad de la maceta.
+La cubierta y la puerta de la caja se mantienen editables, ocultas en los renders
+para mostrar el interior. En el detalle de Raspberry Pi solo se muestran los
+tramos de cable que llegan a la caja; las vistas generales conservan el recorrido completo.
+
+## Artefactos
+
+Rutas relativas a esta carpeta:
+
+| Archivo | Contenido |
 |---|---|
-| `renders/render_invernadero.png` | **Render fotorrealista** listo para insertar en la tesis/ontología. |
-| `renders/vista_previa_invernadero.png` | Vista previa técnica (3D) del modelo. |
+| `modelo/invernadero_mejorado.blend` | Modelo editable con seis escenas persistentes. |
+| `modelo/renderizar_invernadero.py` | Generador del modelo y de los seis renders. |
+| `modelo/verificar_invernadero.py` | Comprueba el archivo guardado, las conexiones y las dimensiones de los PNG. |
+| `renders/render_invernadero_mejorado.png` | Vista general. |
+| `renders/distribucion_sensores.png` | Distribución e identificación de sensores. |
+| `renders/detalle_sensores_planta.png` | Detalle de S1-P01. |
+| `renders/detalle_surco2_planta05.png` | Detalle de S2-P05. |
+| `renders/detalle_surco3_planta10.png` | Detalle de S3-P10. |
+| `renders/detalle_raspberry_pi.png` | Caja, placa, interfaces y entradas de cables. |
 
-## 🧊 Modelo 3D — `modelo/invernadero.glb`
+## Generación y uso
 
-El modelo es un **archivo GLB** (glTF Binary) **editable**: puedes abrirlo,
-modificarlo y re-renderizarlo en **Blender**, o visualizarlo en visores web.
+Configuración utilizada: **Blender 5.2.1**, **Cycles**, **48 muestras** y reducción
+de ruido (denoise). General y distribución: **2400 x 1600 px**; los cuatro
+detalles: **1800 x 1500 px**.
 
-### Contenido del modelo
-- **Estructura de aluminio**: postes, vigas de alero, cabios y cumbrera (techo a dos aguas).
-- **Paredes y techo en** **policarbonato blanco translúcido** (material PBR con
-  transparencia `alphaMode=BLEND`).
-- **Suelo de grava** (lecho de piedrecillas + base).
-- **9 plantas madre de cítricos** en macetas de barro (tronco, ramas y copa de hojas),
-  distribuidas en una cuadrícula 3×3.
-- **Sensores**:
-  - Sensor de **temperatura/humedad ambiente**: carcasa blanca de láminas sobre poste.
-  - Sensor de **humedad en el suelo**: sonda clavada en la grava.
-  - **Solo en 3 plantas** (esquinas y centro): sensor de **humedad en la maceta**
-    (sonda + conector verde) y sensor de **temperatura en las hojas** (pinza + cable).
-  - Las **demás plantas no llevan sensores**, tal como pediste.
+Desde la raíz del repositorio, en PowerShell:
 
-### Materiales PBR aplicados
-`aluminio`, `policarbonato` (translúcido), `terracota`, `suelo`, `tronco`, `hoja`,
-`grava`, `sensor_wh`, `sensor_dk`, `metal`, `conn_green`.
-
-## 🛠️ Herramientas
-
-- **Blender** para abrir y renderizar `invernadero.glb` (importar → *File > Import > glTF 2.0*).
-- **Blender / 3.js** si se quiere un visor interactivo web.
-- Los scripts `generar_invernadero.py` y `vista_previa.py` regeneran el modelo y la
-  vista previa con **Python** (`numpy`, `trimesh`, `matplotlib`).
-
-### Regenerar el modelo (opcional)
-```bash
-# Desde la carpeta modelo/ (requiere un entorno con numpy, trimesh)
-python3 generar_invernadero.py     # escribe invernadero.glb
-python3 vista_previa.py            # escribe ../renders/vista_previa_invernadero.png
+```powershell
+& "C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --python-exit-code 1 --python "invernadero/modelo/renderizar_invernadero.py"
 ```
 
-## 📎 Notas sobre el control de versiones
+Añade `-- --preview` al comando para reducir ambas dimensiones al **50 %** y
+usar **16 muestras**. Esta modalidad sobrescribe los mismos seis PNG y el
+`.blend`; no conserva las salidas de resolución completa. Las rutas de salida
+se resuelven respecto al script, no al directorio de trabajo.
 
-- El **render final** (`render_invernadero.png`) es ligero y puede versionarse en Git.
-- El **modelo `.glb`** y el **script** se pueden versionar; si el `glb` llegara a
-  crecer demasiado, usa **Git LFS** (`git lfs track "*.glb"`) o guárdalo fuera del repo.
-- El render fotorrealista es de carácter **referencial / ilustrativo**.
+Para repetir los renders desde el `.blend` existente sin reconstruir las 30
+plantas, añade `-- --render-only`. La generación completa puede tardar varios
+minutos; esta opción evita ese paso. No aplica cambios nuevos de geometría del
+script. Los PNG se guardan primero en un archivo temporal junto al destino y
+después lo reemplazan para reducir conflictos con la sincronización de OneDrive.
 
-> ⏳ Próximo paso opcional: integrar este invernadero como caso de estudio en la
-> ontología (`../ontologia/`) y en el capítulo de desarrollo de la tesis.
+**Precaución:** el script borra la escena actual. Ejecútalo en segundo plano
+como en el comando anterior o en un archivo nuevo, nunca sobre trabajo sin guardar.
+
+Abre `modelo/invernadero_mejorado.blend` mediante **File > Open**. Las seis
+escenas persistentes tienen cámaras y visibilidad propias: selecciona la escena
+en Blender y pulsa **F12** para renderizarla. El archivo se guarda con la vista
+general activa.
+
+## Verificación
+
+Se comprobaron las 30 macetas, diez por surco, las tres ubicaciones instrumentadas,
+los nueve sensores, los extremos de cada cable en su sensor y su entrada de la
+caja, las seis escenas y las dimensiones de los seis PNG finales. Se revisaron
+visualmente los renders. Para repetir la comprobación sobre las salidas finales:
+
+```powershell
+& "C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --python-exit-code 1 --python "invernadero/modelo/verificar_invernadero.py"
+```

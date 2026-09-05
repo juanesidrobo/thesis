@@ -37,10 +37,14 @@
 \usepackage{setspace}              % interlineado
 \usepackage{fancyhdr}              % encabezados / pies
 \usepackage{enumitem}              % listas personalizables
+\usepackage{etoolbox}              % adaptación de entradas del índice
 
 % ----- Bibliografía (IEEE + biber) -----
 % sorting=none → numeración por orden de cita (típico de IEEE)
 \usepackage[style=ieee,backend=biber,sorting=none]{biblatex}
+
+% Adaptar book antes de que hyperref envuelva el comando de capítulo.
+\input{preamble/indice}
 
 % ----- Enlaces / metadatos del PDF (debe ir al final) -----
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}

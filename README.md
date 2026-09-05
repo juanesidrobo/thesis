@@ -2,7 +2,7 @@
 
 Este repositorio aloja **todo** lo relacionado con el proyecto de tesis:
 
-- 📄 **`documentacion/`** → el documento de tesis (**+70 páginas**) en LaTeX, listo para compilar con **XeLaTeX + biber** y citas estilo **IEEE**.
+- 📄 **`documentacion/`** → plantilla del documento de tesis en LaTeX, con **XeLaTeX + biber** y citas estilo **IEEE**. El contenido y las referencias definitivas están pendientes.
 - 🧩 **`ontologia/`** → el documento inicial de la **ontología** (formato `.owl`, abrible en Protégé).
 - 🌱 **`invernadero/`** → render/modelo 3D del invernadero donde se ejecutará el proyecto *(pendiente — lo retomamos más adelante)*.
 - 📊 **`datos/`** → conjuntos de datos, registros y logs asociados al proyecto.
@@ -18,7 +18,7 @@ thesis/
 ├── .gitignore                   ← ignora artefactos de compilación y archivos temporales
 ├── Makefile                     ← orquestador de compilación (delega en documentacion/)
 │
-├── documentacion/               ← 📄 LA TESIS (+70 páginas) — proyecto LaTeX
+├── documentacion/               ← 📄 LA TESIS — proyecto LaTeX
 │   ├── main.tex                 ← documento principal (punto de entrada)
 │   ├── Makefile                 ← compilación local de la tesis
 │   ├── latexmkrc                ← configuración de latexmk (XeLaTeX + biber)
@@ -56,6 +56,9 @@ thesis/
 ---
 
 ## ✅ Requisitos para compilar TEX en local
+
+**Windows 11 y VS Code:** consulta la [guía de instalación, escritura y compilación](documentacion/README.md).
+Incluye LaTeX Workshop, Perl para `latexmk` y una alternativa nativa sin Make ni Bash.
 
 Necesitas una distribución de **TeX Live** completa (o MiKTeX en Windows) con:
 

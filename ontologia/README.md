@@ -29,6 +29,7 @@ ontologia/
 
 ## ⚙️ Dónde referenciarlo en la tesis
 
-En `documentacion/contenido/capitulos/04_metodologia.tex` y `05_desarrollo.tex`
-se menciona el desarrollo de la ontología. Puedes citar este archivo desde el
+En `documentacion/contenido/capitulos/04_arquitectura_sistema.tex` y
+`documentacion/contenido/capitulos/05_pruebas_implementacion_evaluacion.tex`
+puedes documentar el diseño y la implementación de la ontología. Puedes citar este archivo desde el
 documento con un `\includegraphics` si generas un diagrama, o referenciarlo como anexo.
