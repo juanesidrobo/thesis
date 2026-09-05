@@ -1,5 +1,67 @@
 # invernadero/
 
+## Versión Mejorada Para Blender
+
+La versión actual es **`modelo/invernadero_mejorado.blend`**. Se abre directamente
+con **File > Open**; no requiere importar el GLB anterior.
+
+| Archivo nuevo | Contenido |
+|---|---|
+| [`renders/render_invernadero_mejorado.png`](renders/render_invernadero_mejorado.png) | Vista general con nueve plantas P01–P09 y cuatro sensores identificados. |
+| [`renders/detalle_sensores_planta.png`](renders/detalle_sensores_planta.png) | Acercamiento de P02, con los sensores de hoja y de humedad relativa del aire. |
+| [`modelo/invernadero_mejorado.blend`](modelo/invernadero_mejorado.blend) | Geometría editable, materiales, luces, rótulos y dos cámaras. |
+| [`modelo/renderizar_invernadero.py`](modelo/renderizar_invernadero.py) | Generador nativo de Blender; no necesita numpy, trimesh ni recursos externos. |
+
+### Instrumentación Actual
+
+| ID / color | Variable | Ubicación |
+|---|---|---|
+| 01 / azul | Humedad relativa ambiente | Soporte independiente con abrigo de radiación blanco. |
+| 02 / naranja | Temperatura ambiente | Segundo soporte con abrigo de radiación blanco. |
+| 03 / rojo | Temperatura de una hoja | Pinza de contacto sobre una hoja de P02. |
+| 04 / turquesa | Humedad relativa del aire junto al follaje | Carcasa ventilada sostenida en la misma planta P02. |
+
+**Humedad relativa no significa humedad del suelo.** Esta versión no incorpora
+sondas de humedad de sustrato. La caja situada junto al tronco representa un
+registrador de datos, no un quinto sensor. Las otras ocho plantas no llevan sensores.
+
+La composición es una **ilustración técnica 3D**, no una fotografía ni un plano
+constructivo. Las dimensiones, carcasas y colores son ilustrativos, no modelos
+comerciales validados. Se ocultan el cerramiento frontal, el lateral derecho y
+una mitad de la cubierta para ver el interior; las piezas permanecen en el `.blend`.
+El detalle oculta temporalmente las otras plantas y la estructura, sin cambiar P02.
+
+### Regenerar Los Renders
+
+Probado con Blender **5.2.1**, motor **Cycles**, 48 muestras, reducción de ruido y
+salida de **1800 × 1500 píxeles**. Desde la raíz del repositorio, en PowerShell:
+
+```powershell
+& "C:\Program Files\Blender Foundation\Blender 5.2\blender.exe" --background --python-exit-code 1 --python "invernadero/modelo/renderizar_invernadero.py"
+```
+
+Si Blender está en `PATH`:
+
+```bash
+blender --background --python-exit-code 1 --python invernadero/modelo/renderizar_invernadero.py
+```
+
+Añade `-- --preview` para una prueba a 990 × 825 y 16 muestras. Ambas modalidades
+sobrescriben los **dos PNG nuevos y el `.blend` mejorado**; la prueba no conserva
+la resolución final. Las rutas de salida se resuelven desde el script.
+
+**Precaución:** el script reemplaza la escena activa. Ejecútalo en segundo plano
+o en un archivo nuevo, no sobre una escena con trabajo sin guardar.
+El `.blend` queda preparado para renderizar la vista general con F12. Para repetir
+el acercamiento con el aislamiento y los rótulos correctos, ejecuta el script;
+cambiar únicamente de cámara no aplica ese aislamiento.
+
+## Versión Anterior Conservada
+
+Los archivos y la documentación siguientes corresponden al **modelo base anterior**,
+no al `.blend` mejorado. Se conservan como referencia; sus sensores de suelo y su
+instrumentación en tres plantas **no describen la versión actual**.
+
 Carpeta para el **render / modelo 3D del invernadero** donde se ejecutará y
 desplegará el proyecto de la tesis.
 
