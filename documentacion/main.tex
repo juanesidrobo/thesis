@@ -62,11 +62,17 @@
 % ============================================================
 \input{contenido/destacados}
 
-% El encabezado permanece visible aunque todavía no haya citas reales.
+% Permitir cortes en las URL largas del catálogo bibliográfico.
 \chapter*{REFERENCIAS}
 \markboth{REFERENCIAS}{REFERENCIAS}
 \addcontentsline{toc}{chapter}{REFERENCIAS}
+\begingroup
+\setlength{\emergencystretch}{3em}
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburlucpenalty}{100}
+\setcounter{biburllcpenalty}{100}
 \printbibliography[heading=none]
+\endgroup
 
 % No usar backmatter: desactivaría la numeración alfabética de los anexos.
 \chapter*{ANEXOS}

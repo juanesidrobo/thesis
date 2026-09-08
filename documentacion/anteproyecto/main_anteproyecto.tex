@@ -1,0 +1,623 @@
+\documentclass[12pt,letterpaper]{article}
+
+% ===================== PAQUETES =====================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage[style=ieee, doi=true, url=true, isbn=false, maxnames=99, minnames=1]{biblatex}
+\DeclareNameFormat{default}{%
+  \usebibmacro{name:given-family}
+    {\namepartfamily}
+    {\namepartgiven}
+    {\namepartprefix}
+    {\namepartsuffix}%
+  \usebibmacro{name:andothers}}
+\addbibresource{referenciasplanteamiento.bib}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{colortbl}
+
+% ===================== CONFIGURACIÓN DE PÁGINA =====================
+\geometry{
+    left=3cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}      % Reduce el espacio entre párrafos (era 6pt)
+\setlength{\parskip}{3pt plus 1pt minus 1pt}
+\setstretch{1.2}
+\setlength{\bibitemsep}{3pt}
+\setlength{\bibnamesep}{0pt}
+
+% ===================== CONFIGURACIÓN DE SECCIONES =====================
+\titleformat{\section}
+    {\normalfont\Large\bfseries\centering}
+    {\thesection.}{0.5em}{\MakeUppercase}
+\titleformat{\subsection}
+    {\normalfont\large\bfseries}
+    {\thesubsection.}{0.5em}{\MakeUppercase}
+
+% ===================== CONFIGURACIÓN DE TABLA DE CONTENIDO =====================
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\contentsname}{\centering TABLA DE CONTENIDO}
+\renewcommand{\listfigurename}{\centering LISTA DE FIGURAS}
+\renewcommand{\listtablename}{\centering LISTA DE TABLAS}
+
+\addto\captionsspanish{
+    \renewcommand{\tablename}{Tabla}
+}
+
+% ===================== INICIO DEL DOCUMENTO =====================
+\begin{document}
+
+% ===================== PORTADA =====================
+\begin{titlepage}
+    \centering
+    
+    \textbf{SISTEMA COGNITIVO DE MONITOREO Y DETECCIÓN DE TETRANYCHUS
+URTICAE EN CULTIVOS CÍTRICOS}\\[1cm]
+    % Aquí coloca el título de tu proyecto
+    
+    \vspace{1cm}
+    
+    \includegraphics[width=4cm]{escudo_unicauca.jpg}\\[1.5cm]
+    % Asegúrate de tener el archivo del escudo de la Universidad del Cauca
+    
+    \textit{Anteproyecto de Trabajo de Grado}\\
+    Modalidad: Trabajo de Investigación\\[1.5cm]
+    
+    \textbf{Luisa Marcela Castillo Egas}\\
+    100620011873\\[0.3cm]
+    \textbf{Juan Esteban Solarte Idrobo}\\
+    100620011855\\[1.5cm]
+    
+    \textit{Director:  PhD. Ing. Fulvio Yesid Vivas Cantero}\\
+    \textit{Codirector: PhD. Ing. Juan Carlos Corrales Muñoz}\\[1cm]
+    
+    Universidad del Cauca\\
+    \textbf{Facultad de Ingeniería Electrónica y Telecomunicaciones}\\
+    \textbf{Departamento de Telemática}\\
+    {Línea de investigación e-ambiente}\\
+    Popayán, Agosto de 2026
+    
+\end{titlepage}
+
+% ===================== TABLA DE CONTENIDO =====================
+\newpage
+\tableofcontents
+
+% ===================== LISTA DE TABLAS =====================
+\newpage
+\listoftables
+
+% ===================== LISTA DE FIGURAS =====================
+\listoffigures
+
+% ===================== LISTA DE ACRÓNIMOS =====================
+\newpage
+\section*{LISTA DE ACRÓNIMOS}
+\addcontentsline{toc}{section}{LISTA DE ACRÓNIMOS}
+
+\begin{tabular}{@{}p{2.5cm}p{12cm}@{}}
+CRISP-ML(Q) & Machine Learning Process Model with Quality Assurance Methodology \\
+FOB   & Free On Board  \\
+GPU   & Graphics Processing Unit  \\
+ICA   & Instituto Colombiano Agropecuario \\
+IEEE & Institute of Electrical and Electronics Engineers \\
+INTA & Instituto Nacional de Tecnología Agropecuaria \\
+IoT & Internet of Things  \\
+LoRa & Long Range \\
+MIT & Massachusetts Institute of Technology \\
+PMBOK & Project Management Body of Knowledge  \\
+PRISMA & Preferred Reporting Items for Systematic Reviews and Meta-Analyses \\
+R-CNN & Region-based Convolutional Neural Network  \\
+UC IPM & University of California Integrated Pest Management \\
+VIS/NIR & Visible/Near Infrared \\
+WP    & Work Package \\
+\end{tabular}
+
+% ===================== SECCIÓN 1: PLANTEAMIENTO DEL PROBLEMA =====================
+\newpage
+\section{PLANTEAMIENTO DEL PROBLEMA}
+
+\subsection{Definición del Problema}
+
+Los cítricos constituyen una de las principales fuentes agrícolas a nivel 
+mundial\cite{gill2023citrus}. Estos cultivos representan un recurso económico clave y proveen alimentos vitales para múltiples comunidades. En Colombia, la citricultura posee un valor estratégico innegable. La producción de limón Tahití generó exportaciones por 96.337 toneladas y USD 137,5 millones FOB durante el año 2024 \cite{asohofrucol2024}. Dentro de esta cadena productiva, 
+los viveros de los cítricos desempeñan un rol fundamental en la propagación de 
+especímenes de alta calidad. Las plantas madre constituyen la base genética de esta propagación comercial de acuerdo con la Resolución 12816 de 2019 del Instituto Colombiano Agropecuario (ICA), la cual exige infraestructuras cubiertas para el control sanitario \cite{ica2019resolucion}. Por consiguiente, los agricultores deben proteger rigurosamente estas plantas para asegurar la viabilidad genética y la rentabilidad económica regional \cite{citrusCenter2012}.
+
+Para garantizar esta protección, resulta imperativo controlar las amenazas biológicas, entre las cuales destacan los ácaros. Especies como la Tetranychus urticae, conocida como araña roja, amenazan gravemente la viabilidad de los cultivos\cite{mesa2012acaros}, al inducir respuestas defensivas que alteran el desarrollo fenológico de la planta \cite{agut2015}.  Las arañas rojas atacan directamente el envés de las hojas, extraen la savia y causan defoliación. Este proceso altera la fotosíntesis y produce decoloraciones mates, telarañas y manchas amarillo-herrumbrosas \cite{gonzalezgonzalez2021}. La propagación de esta plaga está estrictamente ligada a las variables microclimáticas. El aumento de la temperatura y las humedades específicas de los invernaderos actúan como detonantes biológicos que aceleran su proliferación. El ciclo de vida de este ácaro dura entre 7 y 17 días, acortándose drásticamente bajo temperaturas elevadas \cite{praslicka2004}\cite{gva2026ivia}. En consecuencia, la rápida reproducción impulsada por el microclima dificulta la implementación de medidas preventivas.
+
+Actualmente, los agrónomos verifican la presencia de la Tetranychus urticae mediante métodos manuales, laboriosos y basados en muestreo \cite{ucipm2023}. A nivel de campo, los operarios inspeccionan visualmente las hojas con lupas de 10X a 15X y monitorean la dispersión empleando trampas adhesivas cromáticas \cite{ucipm2023}. A nivel de laboratorio, los especialistas recurren al muestreo destructivo. Arrancan folíolos para analizarlos bajo estereomicroscopios o los procesan mediante máquinas de cepillado (mite brushing machines) para separar los ácaros antes del conteo \cite{popDensity}. Esta inspección manual y el conteo microscópico exigen tiempos logísticos excesivos y generan fatiga visual en los operarios. La 
+dependencia exclusiva de la inspección visual humana genera un cuello de botella logístico que subestima la densidad real de la plaga y retrasa la toma de decisiones \cite{ucipm2023}.
+
+Apesar de los avances en herramientas computacionales aplicadas a la  agricultura, persisten desafíos tecnológicos en el monitoreo automatizado. En primer lugar, existe una marcada ausencia de validación en campo. La mayoría de los algoritmos operan bajo condiciones de laboratorio, careciendo de robustez en entornos agrícolas reales sujetos a iluminación variable y oclusión por follaje \cite{jelali2024}. A su vez, prevalece una carencia de detección temprana directa. Las soluciones actuales identifican la infestación infiriendo el daño foliar avanzado (clorosis), asumiendo una postura puramente reactiva \cite{nieuwenhuizen2020}. Resulta vital detectar la plaga viva en sus estados iniciales. También, los sistemas tradicionales carecen de arquitecturas cognitivas diseñadas para operar directamente en el cultivo. Las redes neuronales estándar funcionan como cajas negras que omiten el contexto fenológico, carecen de interpretabilidad biológica \cite{ilodibe2026thrips} y dependen de servidores en la nube o GPUs de alto rendimiento \cite{zhou2023}. Estas herramientas ignoran la fusión de datos temporales usando Internet of Things(IoT) con el conocimiento estático del invernadero (ubicación, tipo de malla, reglas agronómicas). Esta fragmentación de la información impide el razonamiento contextual y limita la viabilidad de tomar decisiones autónomas mediante procesamiento local (Edge Computing) en escenarios con restricciones de conectividad y energía \cite{umar2024ontology}.
+
+Ante este contexto, surge la siguiente pregunta de investigación: \textbf{¿Cómo detectar de forma temprana la presencia de Tetranychus urticae en plantas madre de cítricos cultivadas bajo condiciones de invernadero en viveros de la zona Rural de Popayán, Cauca?}
+
+La hipótesis plantea que el diseño de un sistema cognitivo de monitoreo de Tetranychus urticae basado en tecnologías de la agroindustria 4.0 permite la detección temprana de la plaga viva directamente en campo, facilitando intervenciones agronómicas que
+prevengan el daño en las plantas madre.
+
+\subsection{Justificación}
+
+La automatización del monitoreo en viveros de cítricos transforma radicalmente el manejo preventivo de plagas. La sustitución de la inspección humana por herramientas tecnológicas facilita la detección temprana del ácaro vivo. La intervención oportuna protege el capital biológico de las plantas madre, esto permite no llegar a niveles de daño del 12\%, lo cual obliga a los viveros a aplicar acaricidas químicos. Esta intervención química incrementa los costos operativos y genera impactos ambientales negativos \cite{dimasi_inta}. Alcanzar niveles que superan el umbral del 17\% exige la destrucción total de la planta madre. Esta medida genera una pérdida económica debido a la inversión previa en genética y certificaciones.
+
+A nivel tecnológico, los entornos agrícolas imponen desafíos complejos de conectividad, suministro energético y variabilidad visual. La literatura demuestra que los sistemas inteligentes aislados resultan insuficientes ante estas condiciones \cite{yu2025}. Este escenario requiere una arquitectura cognitiva que integre tres fuentes de información: datos temporales (IoT), percepción visual (aprendizaje profundo) y conocimiento experto humano. El uso de herramientas de representación, como ontologías o grafos semánticos, modela el contexto estático del invernadero (materiales, ubicación física) y lo cruza con el clima en tiempo real \cite{umar2024ontology}. La ejecución de este razonamiento mediante procesamiento local directamente en el cultivo asegura autonomía frente a redes inestables. Finalmente, esta integración contextual ajusta los algoritmos a la iluminación real y a la morfología local de la plaga, erradicando los sesgos de los modelos genéricos de laboratorio \cite{tomatoPests}.
+
+El propósito de este trabajo de grado es diseñar una solución innovadora desde la disciplina de la Ingeniería Electrónica y de Telecomunicaciones enfocada en la Agricultura de
+Precisión. El desarrollo exige a los estudiantes aplicar conocimientos avanzados en diseño de hardware embebido, optimización de algoritmos de aprendizaje automático y construcción de bases de conocimiento semánticas. Esta iniciativa aportará experiencia práctica en la construcción de dispositivos electrónicos enfocados en la protección ambiental y la optimización de recursos agrícolas.
+
+% ===================== SECCIÓN 2: ESTADO DEL ARTE =====================
+
+\section{Estado del Arte}
+
+Para la construcción del estado del arte, la presente investigación emplea la metodología PRISMA (Preferred Reporting Items for Systematic Reviews and Meta-Analyses) \cite{prisma2020}, con el objetivo de identificar, seleccionar y analizar de manera sistemática la literatura científica relevante.
+
+La cadena de búsqueda utilizada fue la siguiente:
+
+\textbf{Cadena de búsqueda:}
+
+\begin{verbatim}
+(( "Tetranychus urticae" OR "Two-spotted spider mite" ) AND ("cognitive system"
+OR "knowledge-based system" OR "Plant stress" ) AND ("Detection" OR 
+"Classification" OR "Identification")) OR (("image processing")
+AND (plagas OR acaros OR pest) AND (citricos OR citrus))
+\end{verbatim}
+
+Esta cadena fue ejecutada en bases de datos científicas reconocidas, incluyendo Scopus y ScienceDirect. Posteriormente, los resultados obtenidos fueron integrados en un único conjunto de datos, eliminando duplicados. El siguiente apartado presenta los resultados correspondientes a cada fase.
+
+\textbf{Identificación}
+
+La búsqueda utilizó bases de datos proporcionadas por la Universidad del Cauca, exactamente Web of Science, ScienceDirect y Scopus.En esta fase, los investigadores aplicaron la cadena de búsqueda en cada biblioteca digital sin establecer filtros iniciales. Como resultado, los motores de búsqueda arrojaron un conjunto inicial de estudios potencialmente relevantes. La Tabla~\ref{tab:sin_filtros} presenta la cantidad de resultados encontrados en cada base de datos; en conjunto,  89 artículos.
+
+\begin{table}[H]
+\centering
+\caption{Resultados obtenidos de la cadena de búsqueda sin filtros}
+\label{tab:sin_filtros}
+\begin{tabular}{l c}
+\toprule
+\textbf{Biblioteca Digital} & \textbf{Resultados Iniciales} \\
+\midrule
+Scopus & 37 \\
+ScienceDirect & 28 \\
+Web of Science & 24 \\
+\midrule
+\textbf{Total sin filtros} & \textbf{89} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Los investigadores establecieron como criterio de inclusión publicaciones entre el año 2020 y la actualidad (2026), y eliminaron 13 duplicados de la cadena de búsqueda. Dando un total de 63  articulos.
+
+\textbf{Screening}
+
+Esta fase incluye una revisión preliminar de los estudios mediante la lectura de títulos y resúmenes (abstracts), con el fin de descartar aquellos que no ajustaban al enfoque de la investigación.
+
+Los investigadores excluyeron los trabajos que no abordaban directamente la araña roja o que no correspondían a los contextos definidos. Asimismo, descartaron los estudios con enfoques exclusivamente químicos, biológicos o agronómicos, así como aquellos centrados en arquitecturas genéricas, en el uso de conjuntos de datos sin una aplicación específica o en análisis desarrollados en escalas no pertinentes; es decir, realizados en entornos altamente controlados sin aplicabilidad en contextos reales.
+
+Como resultado, los investigadores seleccionaron 29 artículos para la fase de revisión a texto completo. 
+
+\textbf{Elegibilidad}
+
+En esta fase, los autores evaluaron con mayor profundidad la pertinencia de cada estudio, considerando aspectos como la metodología empleada, la aplicabilidad al problema de investigación y la disponibilidad del texto completo; en este caso, la totalidad de los documentos fueron recuperados, por lo que los 29 artículos pasaron a revisión a texto completo.
+
+Posteriormente, los investigadores aplicaron criterios de exclusión relacionados con estudios de enfoque exclusivamente biológico, químico o agronómico sin integración tecnológica, revisiones sistemáticas o documentos secundarios sin desarrollo experimental propio, investigaciones centradas en contextos agrícolas o plagas no comparables con el alcance del proyecto, así como metodologías con limitada aplicabilidad en escenarios reales de monitoreo agrícola.
+
+\textbf{Inclusión}
+
+Tras la revisión, 12 artículos cumplieron los criterios establecidos y conformaron la base bibliográfica del presente trabajo de grado.
+
+La Figura~\ref{fig:prisma} presenta el diagrama PRISMA, el cual resume el proceso completo de selección.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{DPrisma.png}
+\caption{Diagrama PRISMA del proceso de selección de artículos}
+\label{fig:prisma}
+\end{figure}
+
+\subsection{Trabajos Relacionados}
+
+Este apartado desarrolla un análisis crítico de la literatura científica y estructura los antecedentes en tres áreas de enfoque determinantes para el proyecto de investigación. Inicialmente, la revisión examina los sistemas de detección de plagas a microescala, y contrasta los métodos tradicionales que identifican el daño foliar con las nuevas arquitecturas de visión artificial capaces de reconocer organismos diminutos de forma directa. Posteriormente, el documento evalúa la robustez de estas soluciones en entornos agrícolas reales, destacando las estrategias de preprocesamiento de imágenes que mitigan el sesgo óptico frente a las condiciones adversas del campo. Por último, la sección explora las tendencias de optimización computacional orientadas al procesamiento local, donde los autores establecen el uso de hardware embebido y algoritmos livianos para garantizar la autonomía operativa y energética in situ.
+
+\subsubsection{Enfoques para la Detección de Plagas a Microescala}
+
+La identificación automatizada de organismos de tamaño minúsculo, como \textit{Tetranychus urticae}, representa un desafío computacional particular. Al analizar la literatura, hay una clara dicotomía: la mayoría de los sistemas actuales están diseñados para detectar las consecuencias de la infestación en la hoja (el daño foliar, la clorosis o los síntomas) en lugar de identificar a la plaga viva de forma directa \cite{gonzalezgonzalez2021}. Biológicamente, el daño inicial de la araña roja es microscópico, lo que justifica la necesidad inminente de intervenciones algorítmicas de detección temprana antes de que el estrés en la planta sea irreversible \cite{neto2026early}.
+
+Frente a esta limitación, investigaciones recientes han demostrado que las arquitecturas híbridas, como el modelo Cascade R-CNN acoplado con Swin Transformer, ofrecen resultados superiores para localizar micro-insectos. Esta arquitectura emplea un análisis de ventanas desplazadas (\textit{Shifted Windows}) a múltiples escalas, logrando aislar píxeles diminutos que otras redes omitirían \cite{li2022cascade}. Adicionalmente, el estado del arte subraya la importancia de metodologías innovadoras de procesamiento de imágenes y \textit{Machine Learning} para extraer características específicas de plagas en cítricos, lo cual resulta vital para preservar la morfología del organismo y evitar confusiones algorítmicas, compensando la escasez de capturas ópticas mediante técnicas de aumentación \cite{valderrama2025aleurothrixus}.
+
+\subsubsection{Robustez de los Sistemas en Entornos Agrícolas}
+
+Diversos estudios han evidenciado un alto riesgo de sesgo óptico al entrenar redes neuronales utilizando exclusivamente repositorios estándar con fondos uniformes \cite{sun2025deit}. Adicionalmente, los modelos entrenados sin contemplar el ruido visual externo sufren de un sobreajuste crítico y no logran generalizar a condiciones de campo abierto \cite{mallick2025review}. En la práctica, estos algoritmos fracasan frente a la iluminación variable, así como ante el polvo y la suciedad propia del cultivo que afectan directamente la detección en campo \cite{cunha2024psyllid}. Además, aunque enfoques como el análisis hiperespectral nocturno resultan precisos, logísticamente son inviables y excesivamente costosos para ser trasladados a un dispositivo IoT bajo condiciones reales \cite{nansen2024methods}.
+
+Para mitigar esta vulnerabilidad, los enfoques más recientes apuestan por técnicas avanzadas de preprocesamiento. La aplicación de filtros matemáticos, como la Ecualización Adaptativa de Histograma, ha demostrado compensar las variaciones lumínicas y resaltar anomalías en hojas sobreexpuestas \cite{cetiner2022citrus}. Asimismo, el uso de modelos híbridos generalizados que integran mitigación de sesgo mediante pesos dinámicos y validación \textit{zero-shot}, emergen como estrategias efectivas para forzar al modelo a operar correctamente en entornos no controlados \cite{wadhwa2026hybrid}.
+
+Más allá de la corrección visual, la búsqueda de robustez en entornos agrícolas ha impulsado arquitecturas que integran redes IoT para capturar simultáneamente imágenes y variables físicas del cultivo \cite{quispe2024lora}. En estos desarrollos, los sistemas operan bajo un enfoque estrictamente sensorial: procesan las métricas climáticas y las detecciones visuales como canales de información paralelos e independientes. Esta metodología aborda el monitoreo desde una perspectiva descriptiva, generando reportes y alertas basados en la recolección de datos crudos, donde la identificación de la plaga y las variaciones del microclima son manejadas como eventos aislados, sin llegar a modelar algorítmicamente la relación biológica o agronómica que existe entre ellos.
+
+\subsubsection{Optimización Computacional en la Agricultura}
+
+Históricamente, los sistemas de detección de alta precisión han requerido arquitecturas profundas ejecutadas en servidores con Unidades de Procesamiento Gráfico (GPU) de alto rendimiento. Esta dependencia computacional resulta inviable para entornos rurales y operaciones agrícolas continuas, donde existen restricciones severas de conectividad y suministro energético.
+
+Como respuesta, la literatura actual marca una fuerte tendencia hacia la optimización computacional y el procesamiento local directamente en el cultivo. En este escenario, los análisis comparativos justifican firmemente el uso de redes convolucionales ligeras (como MobileNet) para la optimatización computacional, evitando las extremas demandas energéticas de los Transformers \cite{mallick2025review}. Investigaciones han validado que la implementación de estos extractores livianos permite ejecutar los modelos eficientemente en hardware de bajo costo, logrando tiempos de latencia inferiores a los 300 milisegundos para operaciones portátiles en tiempo real \cite{wang2021portable}. Para complementar estas infraestructuras de bajo consumo,los autores han explorado el despliegue de redes neuronales optimizadas en aplicaciones web orientadas a la captura a través de teléfonos móviles \cite{cunha2024psyllid}, así como la integración del protocolo LoRaWAN, que emplea la modulación LoRa en su capa física para asegurar un monitoreo automatizado ante las severas restricciones de red del campo  \cite{quispe2024lora}.
+
+\subsection{Brechas Existentes}
+
+A partir del análisis crítico de la literatura, los investigadores identificaron vacíos de conocimiento y deficiencias técnicas recurrentes en los sistemas de monitoreo propuestos para la detección y monitoreo de la araña roja. Estas fallas radican en la incapacidad de detectar al espécimen vivo, la falta de robustez en entornos no controlados y la omisión de factores contextuales del cultivo. Para estructurar de manera sistemática estos vacíos, los artículos seleccionados fueron evaluados frente a tres criterios tecnológicos fundamentales:
+
+\begin{itemize}
+    \item \textbf{Detección Directa a Microescala:} Capacidad del sistema para aislar e identificar visualmente a la plaga viva en sus etapas iniciales, sin depender de la aparición de síntomas o daños físicos irreversibles en el follaje.
+    \item \textbf{Validación en Campo Real:} Capacidad del sistema para operar con precisión en entornos agrícolas reales, sujetos a ruido ambiental, oclusión y condiciones lumínicas cambiantes.
+    \item \textbf{Optimización Computacional:} Capacidad de la arquitectura algorítmica para ejecutarse localmente en hardware de recursos limitados, garantizando autonomía energética y operativa.
+\end{itemize}
+
+La Tabla~\ref{tab:brechas} presenta la matriz de brechas, evidenciando cuáles estudios abordan de manera parcial o satisfactoria cada uno de estos requerimientos tecnológicos.
+
+\begin{table}[htbp]
+\centering
+\caption{Matriz de brechas existentes en la literatura analizada}
+\label{tab:brechas}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Referencia} & \textbf{Detección Directa} & \textbf{Validación en} & \textbf{Optimización} \\
+                    & \textbf{a Microescala}     & \textbf{Campo Real}    & \textbf{Computacional} \\
+\midrule
+\cite{gonzalezgonzalez2021}       &            & \checkmark &            \\
+\cite{neto2026early}              & \checkmark &            &            \\
+\cite{li2022cascade}              & \checkmark & \checkmark &            \\
+\cite{valderrama2025aleurothrixus}& \checkmark &            &            \\
+
+
+\cite{sun2025deit}                &            & \checkmark & \checkmark \\
+\cite{mallick2025review}          &            & \checkmark & \checkmark \\
+\cite{cunha2024psyllid}           &            & \checkmark & \checkmark \\
+\cite{nansen2024methods}          & \checkmark &            & \checkmark \\
+\cite{cetiner2022citrus}          &            & \checkmark &            \\
+\cite{wadhwa2026hybrid}           &            & \checkmark &            \\
+\cite{quispe2024lora}             &            & \checkmark & \checkmark \\
+\cite{wang2021portable}           & \checkmark &            & \checkmark \\
+\textbf{Trabajo propuesto}        & \checkmark & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A partir de la evaluación plasmada en la matriz, el análisis clasifica las deficiencias detectadas en los trabajos de la literatura en las siguientes dimensiones:
+
+\vspace{0.3cm} 
+\noindent\textbf{Brecha de Detección Directa a Microescala:} El principal vacío que revela la literatura científica actual es predominantemente reactiva. La gran mayoría de los enfoques analizados están diseñados para detectar las consecuencias de la infestación como el daño foliar, la clorosis o los síntomas, en lugar de identificar al espécimen vivo de manera directa. Cuando los modelos intentan buscar a la araña roja, fracasan debido a que su tamaño diminuto hace que el sistema la confunda con la textura natural de la hoja. Esta dependencia de los síntomas foliares representa una falla crítica: si el sistema espera a que la hoja esté visiblemente enferma para generar la alerta, la planta ya ha sufrido un daño severo, perdiendo el propósito preventivo del monitoreo.
+
+\vspace{0.3cm}
+\noindent\textbf{Brecha de Validación en Campo Real:} Existe una deficiencia metodológica en la validación de los modelos, ya que una proporción mayoritaria de los estudios limita sus pruebas a entornos controlados de laboratorio o repositorios estáticos con fondos uniformes. Los experimentos demuestran que estos sistemas sufren caídas severas en sus métricas de exactitud al enfrentarse a la oclusión por follaje, el polvo y los cambios abruptos de iluminación en invernaderos o campos abiertos, demostrando que los modelos actuales están sobreajustados a ambientes artificiales.
+
+\vspace{0.3cm}
+\noindent\textbf{Brecha de Optimización Computacional:} La literatura científica evidencia un vacío severo en la eficiencia de los algoritmos. Los sistemas que reportan precisiones elevadas presentan la falla de depender de infraestructura de procesamiento masivo en servidores de alta gama o conexiones permanentes a la nube. Estos desarrollos omiten las restricciones energéticas y de conectividad inestable que caracterizan a las zonas agrícolas, fallando en ofrecer soluciones optimizadas para operar de forma local y autónoma en el sitio de cultivo.
+
+\vspace{0.3cm}
+\noindent\textbf{Brecha de Integración Cognitiva:} Los proyectos fallan al operar como sistemas sensoriales aislados. Las soluciones actuales procesan los datos de manera descontextualizada, ignorando la relación biológica entre el avance de la plaga y el microclima. Existe un vacío en el diseño de arquitecturas capaces de integrar la detección automatizada con las reglas y umbrales definidos por expertos agrónomos, como la aceleración del ciclo de vida del ácaro ante incrementos de temperatura. La falta de una perspectiva cognitiva impide que los sistemas actúen como herramientas proactivas eficaces para el agricultor.
+
+\subsection{Aportes del Proyecto}
+
+A partir de las brechas identificadas, el presente trabajo de investigación propone el diseño e implementación de un sistema cognitivo de monitoreo y detección de \textit{Tetranychus urticae} en cultivos de cítricos.
+
+A diferencia de las soluciones centralizadas que requieren transmisión constante de datos hacia la nube, este proyecto aporta el diseño de una arquitectura basada en un sistema cognitivo, computacionalmente optimizada y autónoma para ejecutarse de forma local. Para alimentar este sistema y superar el sesgo de los repositorios de laboratorio, los investigadores construirán un conjunto de datos propio, recolectado bajo las condiciones ambientales reales de un invernadero destinado a 
+la protección de plantas madre en un vivero del departamento del Cauca.
+
+Finalmente, el aporte fundamental y factor diferencial de esta solución radica en su naturaleza cognitiva. Al integrar el conocimiento experto agronómico y las variables microclimáticas, el sistema superará el enfoque tradicional de procesamiento aislado, entregando una herramienta eficiente y de baja latencia que apoya la intervención oportuna.
+
+% ===================== SECCIÓN 3: OBJETIVOS =====================
+\section{OBJETIVOS}
+
+\subsection{OBJETIVO GENERAL}
+
+Desarrollar un sistema cognitivo para el monitoreo y la detección temprana de la araña Tetranychus urticae en plantas madre de cítricos, ubicadas en viveros bajo cubierta en la región de la zona Rural de Popayán del 
+departamento del Cauca. 
+
+\subsection{OBJETIVOS ESPECÍFICOS}
+
+\begin{itemize}
+    \item Caracterizar el ciclo biológico de la araña Tetranychus urticae en plantas madre de cítricos bajo cubierta, para identificar la presencia y sus efectos visibles en las plantas.
+    \item Diseñar la arquitectura del sistema cognitivo de monitoreo y detección precisa de la
+araña usando la caracterización.
+    \item Evaluar mediante un prototipo la confiabilidad del sistema cognitivo y su viabilidad para la detección directa de la plaga en condiciones de invernadero con procesamiento local.
+\end{itemize}
+
+% ===================== SECCIÓN 4: METODOLOGÍA, ACTIVIDADES Y CRONOGRAMA =====================
+
+\section{METODOLOGÍA, ACTIVIDADES Y CRONOGRAMA}
+
+\subsection{Metodología}
+
+La gestión del proyecto seguirá las directrices del Cuerpo de Conocimientos de Gestión de Proyectos (PMBOK) \cite{pmi2017pmbok}, utilizando Paquetes de Trabajo (WP) para planificar, ejecutar y supervisar las actividades. Paralelamente, el desarrollo del componente computacional adoptará la metodología CRISP-ML(Q) \cite{studer2021crispml}. Este marco estructura rigurosamente el ciclo de vida de soluciones analíticas y cognitivas. Su aplicación guía la ingeniería de datos, la representación del conocimiento y el aseguramiento de la calidad técnica. Adicionalmente, el diseño de la arquitectura física y de conectividad aplicará metodologías estándar para el desarrollo de plataformas IoT \cite{senoo2023iot}.
+
+\subsection{Actividades y Cronograma}
+
+Las actividades han sido secuenciadas en un tiempo de 9 meses (36 semanas).
+
+\begin{enumerate}[label=\textbf{WP\arabic*.}, leftmargin=*]
+\item \textbf{Caracterización del entorno y levantamiento del conocimiento}
+\begin{enumerate}[label=1.\arabic*.]
+    \item Revisión sistemática de literatura sobre arquitecturas cognitivas y métodos directos para la detección in-situ de \textit{Tetranychus urticae}.
+    \item Trabajo de campo orientado a la observación directa en plantas madre para caracterizar el hábitat y la ubicación de la plaga viva.
+    \item Entrevistas con expertos del dominio para la caracterización agronómica y biológica de la infestación.
+    \item Estructuración de la base de conocimiento agrícola.
+\end{enumerate}
+
+\item \textbf{Diseño de la arquitectura cognitiva}
+\begin{enumerate}[label=2.\arabic*.]
+    \item Desarrollo de la representación del conocimiento.
+    \item Diseño estructural de la arquitectura cognitiva.
+    \item Diseño de los modelos de detección orientados a la plaga.
+    \item Integración lógica de los modelos de detección con la base de conocimiento experto y las lecturas ambientales.
+\end{enumerate}
+
+\item \textbf{Integración y evaluación experimental del prototipo}
+\begin{enumerate}[label=3.\arabic*.]
+    \item Implementación de los componentes físicos y despliegue de los modelos cognitivos para monitoreo.
+    \item Diseño del protocolo de pruebas y definición de los criterios de evaluación experimental.
+    \item Ejecución de pruebas controladas de laboratorio para validar el consumo de recursos y la interoperabilidad del sistema.
+    \item Despliegue del prototipo en el invernadero de cítricos y ejecución de validaciones en campo.
+    \item Registro y análisis de los datos experimentales obtenidos durante las pruebas.
+    \item Iteración y ajuste técnico del prototipo basados en la retroalimentación de los ensayos de campo.
+\end{enumerate}
+
+\item \textbf{Documentación y divulgación}
+\begin{enumerate}[label=4.\arabic*.]
+    \item Análisis de los resultados obtenidos
+    \item Elaboración de la monografía final del trabajo de grado.
+    \item Redacción de un artículo de investigación para divulgación científica.
+\end{enumerate}
+
+\end{enumerate}
+
+La Tabla \ref{tab:cronograma} detalla la distribución de estas actividades a lo largo de los 9 meses de ejecución del proyecto.
+
+\begin{table}[H]
+\centering
+\caption{Cronograma de actividades.}
+\label{tab:cronograma}
+\footnotesize
+\scalebox{0.80}{
+\begin{tabular}{|p{5.5cm}|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Actividades} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\
+\hline
+\multicolumn{10}{|l|}{\textbf{WP1. Caracterización del entorno y levantamiento del conocimiento}} \\
+\hline
+1.1. Revisión sistemática de literatura & \cellcolor{green!40} & & & & & & & & \\
+\hline
+1.2. Trabajo de campo en plantas madre & \cellcolor{green!40} & & & & & & & & \\
+\hline
+1.3. Entrevistas con expertos agronómicos & \cellcolor{green!40} & & & & & & & & \\
+\hline
+1.4. Estructuración de la base de conocimiento & \cellcolor{green!40} & \cellcolor{green!40} & & & & & & & \\
+\hline
+\multicolumn{10}{|l|}{\textbf{WP2. Diseño de la arquitectura cognitiva}} \\
+\hline
+2.1. Desarrollo de representación del conocimiento & \cellcolor{blue!30} & \cellcolor{blue!30} & & & & & & & \\
+\hline
+2.2. Diseño estructural de la arquitectura cognitiva & \cellcolor{blue!30} & \cellcolor{blue!30} & & & & & & & \\
+\hline
+2.3. Diseño de los modelos algorítmicos & & \cellcolor{blue!30} & & & & & & & \\
+\hline
+2.4. Integración lógica & & \cellcolor{blue!30} & & & & & & & \\
+\hline
+\multicolumn{10}{|l|}{\textbf{WP3. Integración y evaluación experimental del prototipo}} \\
+\hline
+3.1. Implementación y despliegue para el monitoreo & & \cellcolor{yellow!50} & \cellcolor{yellow!50} & \cellcolor{yellow!50} & & & & & \\
+\hline
+3.2. Diseño del protocolo de pruebas y métricas & & \cellcolor{yellow!50} & \cellcolor{yellow!50} & & & & & & \\
+\hline
+3.3. Pruebas de laboratorio & & & & \cellcolor{yellow!50} & \cellcolor{yellow!50} & & & & \\
+\hline
+3.4. Despliegue en invernadero y validaciones & & & & & & \cellcolor{yellow!50} & \cellcolor{yellow!50} & & \\
+\hline
+3.5. Registro y análisis de datos experimentales & & & & & & & \cellcolor{yellow!50} & \cellcolor{yellow!50} & \\
+\hline
+3.6. Iteración y ajuste técnico del prototipo & & & & & & & & \cellcolor{yellow!50} & \cellcolor{yellow!50} \\
+\hline
+\multicolumn{10}{|l|}{\textbf{WP4. Documentación y divulgación}} \\
+\hline
+4.1. Consolidación e interpretación de resultados & & & & & & & & \cellcolor{red!25} & \cellcolor{red!25} \\
+\hline
+4.2. Elaboración de la monografía & \cellcolor{red!25} & \cellcolor{red!25} & \cellcolor{red!25} & \cellcolor{red!25} & \cellcolor{red!25} & \cellcolor{red!25} & \cellcolor{red!25} & \cellcolor{red!25} & \cellcolor{red!25} \\
+\hline
+4.3. Redacción de artículo científico & & & & & & & & \cellcolor{red!25} & \cellcolor{red!25} \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\vspace{0.5cm}
+
+% ===================== SECCIÓN 5: RECURSOS, PRESUPUESTO Y FUENTES DE FINANCIACIÓN =====================
+
+\section{RECURSOS, PRESUPUESTO Y FUENTES DE FINANCIACIÓN}
+
+Para la realización del presupuesto de los recursos destinados al trabajo de grado, se tomó como referencia la tabla de criterios establecida por el comité de investigación de la Facultad de Ingeniería Electrónica y Telecomunicaciones de la Universidad del Cauca. Considerando para el año 2026 el valor del punto equivalente a \$23.924 COP y una duración de 36 semanas. La Tabla~\ref{tab:presupuesto} presenta el presupuesto y los valores correspondientes.
+
+\subsection*{Recursos humanos}
+
+\textbf{Director:} Ingeniero en Electrónica y Telecomunicaciones, con asignación de 2.5 puntos/hora, teniendo disponibilidad de 2 horas para asesorías, para un total de 72 horas.
+
+\textbf{Codirector:} Ingeniero en Electrónica y Telecomunicaciones, con asignación de 2.5 puntos/hora, realizando reuniones de seguimiento y orientación con una intensidad de 2 horas quincenales, para un total de 36 horas.
+
+\textbf{Estudiantes:} Dos estudiantes de Ingeniería Electrónica y Telecomunicaciones con asignación de 1.5 puntos/hora, teniendo asignada una disponibilidad de 30 horas por semana, para un total de 1080 horas.
+
+\begin{table}[H]
+\centering
+\caption{Presupuesto del proyecto y fuentes de financiación}
+\label{tab:presupuesto}
+\renewcommand{\arraystretch}{1.3}
+
+% Ajusta el tamaño al 85% del ancho del texto de la página
+\resizebox{0.55\textwidth}{!}{%
+\begin{tabular}{|l|c|c|c|}
+\hline
+\rowcolor{gray!40}
+\textbf{RECURSOS} & \multicolumn{2}{c|}{\textbf{FUENTES}} & \textbf{SUB TOTAL} \\ \cline{2-3}
+\rowcolor{gray!20}
+ & \textbf{Estudiante} & \textbf{Universidad del Cauca} &  \\ \hline
+
+\rowcolor{gray!30}
+\multicolumn{4}{|c|}{\textbf{Recursos Humanos}} \\ \hline
+
+Director &  & \$4.306.320 & \$4.306.320 \\ \hline
+Codirector &  & \$2.153.160 & \$2.153.160 \\ \hline
+Estudiantes & \$77.513.760 &  & \$77.513.760 \\ \hline
+\rowcolor{gray!30}
+\multicolumn{4}{|c|}{\textbf{Recursos Técnicos}} \\ \hline
+
+\multicolumn{4}{|c|}{Hardware} \\ \hline
+Dispositivos electrónicos & \$3.000.000 & \$2.000.000  & \$5.000.000 \\ \hline
+Dispositivos de computo & \$4.000.000 &  & \$4.000.000 \\ \hline
+\multicolumn{4}{|c|}{Software} \\ \hline
+Herramientas & \$0 & \$0 & \$0 \\ \hline
+
+\rowcolor{gray!30}
+\multicolumn{4}{|c|}{\textbf{Recursos Bibliográficos}} \\ \hline
+
+Bibliografía & \$0 & \$800.000 & \$800.000 \\ \hline
+
+\rowcolor{gray!30}
+\multicolumn{4}{|c|}{\textbf{Recursos Varios}} \\ \hline
+
+Papelería & \$200.000 & \$0 & \$200.000 \\ \hline
+Transporte & \$400.000 & \$0 & \$400.000 \\ \hline
+
+\rowcolor{gray!40}
+\textbf{TOTAL} & \textbf{\$85.113.760} & \textbf{\$9.259.480} & \textbf{\$94.373.240} \\ \hline
+\end{tabular}% <--- Fin del tabular
+} % <--- Cierre de la llave del \resizebox
+\end{table}
+
+% ===================== SECCIÓN 6: CONDICIONES DE ENTREGA =====================
+
+\section{CONDICIONES DE ENTREGA}
+
+% Coloca aquí tu texto de condiciones de entrega.
+
+\begin{itemize}
+    \item \textbf{Monografía.} Documento que engloba todo el conocimiento, abarca una descripción detallada acerca del problema a solucionar, objetivos, metodologías y resultados obtenidos de la ejecución del proyecto. 
+    \item \textbf{Repositorio digital del código fuente del proyecto.} Creación de repositorio público bajo licencia MIT, el cual contendrá todos los scripts usados para la implementación del proyecto.
+    \item \textbf{Artículo.} Documento de divulgación científica el cual describe el proceso principal del proyecto en formato IEEE.
+    \item \textbf{Prototipo} Prototipo funcional del sistema cognitivo para la detección de Tetranychus Urticae desarrollado a lo largo del proyecto.
+\end{itemize}
+
+% ===================== SECCIÓN 7: REFERENCIAS =====================
+
+\renewcommand*{\bibfont}{\small}
+\printbibliography[title={REFERENCIAS}]
+
+%======================= SECCIÓN DE PROPIEDAD INTELECTUAL
+%====================
+\newpage
+\thispagestyle{empty} % Quita el número de página si lo deseas
+
+\begin{center}
+    \textbf{UNIVERSIDAD DEL CAUCA} \\
+    \textbf{FACULTAD DE INGENIERÍA ELECTRÓNICA Y TELECOMUNICACIONES} \\
+    \vspace{1.5cm}
+    \textbf{ACTA DE TITULARIDAD DE DERECHOS DE PROPIEDAD INTELECTUAL PARA TRABAJOS DE GRADO, MODALIDAD INVESTIGACIÓN}
+\end{center}
+
+\vspace{1cm}
+
+\noindent El Trabajo de Grado titulado \underline{Sistema Cognitivo de Monitoreo y Detección de \textit{Tetranychus urticae}} \underline{en Cultivos Cítricos}, cuyo objetivo es \underline{Diseñar un prototipo para el monitoreo y la} \underline{detección temprana} \underline{de la araña} \textit{Tetranychus urticae} en cultivos cítricos en la región del \underline{departamento del Cauca}, el cual se desarrollará por los estudiantes \underline{Luisa Marcela Castillo} \underline{Egas} y \underline{Juan Esteban Solarte Idrobo}, pertenecientes al programa de \underline{Ingeniería Electrónica y} \underline{Telecomunicaciones} de la Facultad de Ingeniería Electrónica y Telecomunicaciones de la Universidad del Cauca y bajo la dirección de \underline{Fulvio Yesid Vivas Cantero}, Docente adscrito al Departamento de \underline{Telemática}, se realizará como requisito para optar al título de \underline{Ingeniero(a) en} \underline{Electrónica y Telecomunicaciones}. La idea original del proyecto es de \underline{Fulvio Yesid Vivas} \underline{Cantero}, identificado con C.C. \underline{76.326.267}, quien la presentó al mencionado Departamento y fue aceptada como tema para el proyecto de grado en referencia.
+
+\vspace{0.5cm}
+
+\begin{itemize}
+    \item Financiación:
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.5} % Da un poco más de espacio a las filas
+\begin{tabular}{|p{12cm}|c|}
+\hline
+Entidades que Participan en la financiación del proyecto & \\
+\hline
+1. Porcentaje Financiación UNIVERSIDAD DEL CAUCA & [100]\% \\
+\hline
+2. Porcentaje Financiación entidades externas & [0]\% \\
+\hline
+3. Nombre de la(s) entidad(es) financiadora(s) (de ser el caso) & \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.5cm}
+
+\noindent Los resultados que surjan del desarrollo de este Trabajo de Grado estarán regidos por el Estatuto de Propiedad Intelectual de la Universidad del Cauca, el cual se encuentra regulado por el Acuerdo 008 de 1999, modificado por el Acuerdo Superior 004 de 2018.
+
+\vspace{0.5cm}
+
+\noindent Todos los participantes manifiestan que conocen y aceptan lo dispuesto en el Acuerdo Superior No. 008 de 1999 y sus respectivas modificaciones, por lo cual, los aspectos no establecidos en la presente acta serán definidos de conformidad con el Estatuto de Propiedad Intelectual de la Universidad del Cauca.
+
+
+% ===================== PÁGINA 2: FIRMAS =====================
+\thispagestyle{empty}
+
+% Comando reutilizable: altura de imagen fija = alineación garantizada
+\newcommand{\firma}[3]{%
+    \begin{minipage}[t]{0.45\textwidth}
+        \makebox[7cm][l]{\includegraphics[height=1.8cm,keepaspectratio]{#1}}\\[-0.4cm]
+        \rule{7cm}{0.4pt}\\
+        \textbf{#2}\\
+        #3
+    \end{minipage}%
+}
+
+\noindent Para constancia de lo anterior, se firma en la ciudad de Popayán, a los \textbf{27} días del mes de \textbf{Agosto} de 2026.
+
+\vspace{1.5cm}
+
+\noindent
+\firma{firmaLMCEf.png}{LUISA MARCELA CASTILLO EGAS}{C.C. 1002965219\\Estudiante Programa Ing. Electrónica y Telecomunicaciones}
+\hfill
+\firma{firmaJESIf.png}{JUAN ESTEBAN SOLARTE IDROBO}{C.C. 1002969386\\Estudiante Programa Ing. Electrónica y Telecomunicaciones}
+
+\vspace{1.8cm}
+
+\noindent
+\begin{minipage}[t]{0.45\textwidth}
+    \rule{7cm}{0.4pt}\\
+    \textbf{PhD. FULVIO YESID VIVAS CANTERO}\\
+    C.C. 76.326.267\\
+    Director del Trabajo de Grado\\
+    Departamento de Telemática
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+    \rule{7cm}{0.4pt}\\
+    \textbf{PhD. JUAN CARLOS CORRALES MUÑOZ}\\
+    C.C. \\
+    Codirector del Trabajo de Grado
+\end{minipage}
+
+\vspace{2cm}
+
+\begin{center}
+    \rule{8cm}{0.4pt}\\
+    \textbf{ALEJANDRO TOLEDO TOVAR}\\
+    Decano Facultad
+\end{center}
+\end{document}
