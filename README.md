@@ -1,10 +1,10 @@
 # Tesis — Anteproyecto, Documentación, Ontología e Invernadero
 
-Este repositorio aloja **todo** lo relacionado con el proyecto de tesis:
+Este repositorio aloja **todo** lo relacionado con el proyecto de tesis Sistema cognitivo de monitoreo y deteccion de Tetranychus Urticae en cultivos cítricos
 
 - 📄 **`documentacion/`** → plantilla del documento de tesis en LaTeX, con **XeLaTeX + biber** y citas estilo **IEEE**. El contenido y las referencias definitivas están pendientes.
 - 🧩 **`ontologia/`** → el documento inicial de la **ontología** (formato `.owl`, abrible en Protégé).
-- 🌱 **`invernadero/`** → render/modelo 3D del invernadero donde se ejecutará el proyecto *(pendiente — lo retomamos más adelante)*.
+- 🌱 **`invernadero/`** → render/modelo 3D del invernadero donde se ejecutará el proyecto .
 - 📊 **`datos/`** → conjuntos de datos, registros y logs asociados al proyecto.
 - 🔧 **`scripts/`** → utilidades (compilación, etc.).
 
@@ -42,7 +42,9 @@ thesis/
 │   ├── README.md
 │   └── ontologia_invernadero.owl
 │
-├── invernadero/                 ← 🌱 RENDER / MODELO 3D del invernadero (pendiente)
+├── invernadero/                 ← 🌱 RENDER / MODELO 3D del invernadero 
+    ├── modelo                   ←  Render listo para blender y .py de creacion 
+    ├── renders                  ←  PNGs de los elementos del render
 │   └── README.md
 │
 ├── datos/                       ← 📊 DATOS del proyecto
@@ -137,4 +139,4 @@ El modelo 3D del invernadero (`.blend`, texturas, renders) y los datasets pueden
 - ✅ Sistema de compilación LaTeX funcionando (XeLaTeX + biber, citas IEEE).
 - ✅ Esqueleto de la tesis (portada, dedicatoria, agradecimientos, resumen/abstract, abreviaturas, 7 capítulos, anexos, bibliografía).
 - ✅ Ontología inicial para Protégé (`.owl`).
-- ⏳ Render del invernadero — **pendiente** (se retoma más adelante).
+- ✅ Render del invernadero en primera version

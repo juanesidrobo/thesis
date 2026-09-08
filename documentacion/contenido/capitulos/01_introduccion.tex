@@ -5,12 +5,27 @@
 \chapter{Introducción}
 \label{cap:introduccion}
 
-% ------------------------------------------------------------------
-% TIP: este es el esqueleto. Rellena cada sección con tu contenido.
-% ------------------------------------------------------------------
+La citricultura constituye una actividad de importancia alimentaria y económica,
+cuya productividad depende, entre otros factores, del desarrollo y la condición
+sanitaria de las plantas \cite{gill2023citrus}. En Colombia, el boletín de
+exportaciones de Asohofrucol ilustra la participación de los cítricos, en
+particular del limón Tahití, en el comercio agrícola \cite{asohofrucol2024}.
+Dentro de esta cadena, los viveros y las plantas madre cumplen una función
+esencial en la obtención de material de propagación. La Resolución 12816 de 2019
+del Instituto Colombiano Agropecuario (ICA) establece requisitos para la
+producción de material de propagación de cítricos, por lo que la protección
+sanitaria de estas plantas resulta relevante para el proyecto
+\cite{ica2019resolucion,citrusCenter2012}.
 
-\textit{[Contexto general del problema. ¿Qué se sabe del tema? ¿Qué avances existen
-en agricultura de precisión, invernaderos, sensórica e Internet de las cosas?]}
+La agricultura de precisión ofrece herramientas para observar el cultivo y
+apoyar decisiones de manejo mediante instrumentación, comunicaciones y análisis
+de datos. En este contexto, el Internet de las cosas (IoT) permite organizar la
+adquisición de variables ambientales, mientras que la visión artificial ofrece
+métodos para analizar imágenes de plantas y plagas
+\cite{senoo2023iot,quispe2024lora}. Este trabajo propone integrar estas
+capacidades con conocimiento agronómico en un sistema cognitivo orientado al
+monitoreo y la detección temprana de \textit{Tetranychus urticae} en plantas madre
+de cítricos bajo cubierta en la zona rural de Popayán, Cauca.
 
 \section{Planteamiento del problema}
 \label{sec:planteamiento}
@@ -18,19 +33,87 @@ en agricultura de precisión, invernaderos, sensórica e Internet de las cosas?]
 \subsection{Definición}
 \label{subsec:definicion-problema}
 
-\textit{[Describe el problema concreto que la tesis pretende resolver. ¿Qué dificultad
-existe en el monitoreo de temperatura y humedad relativa para la detección de
-\textit{Tetranychus urticae} en los cítricos del invernadero?]}
+\textit{Tetranychus urticae}, conocida como araña roja, es un ácaro fitófago de
+interés para la sanidad de los cítricos \cite{mesa2012acaros}. Su alimentación
+puede ocasionar alteraciones foliares y respuestas defensivas de la planta;
+estas respuestas dependen también del genotipo del hospedero
+\cite{agut2015,gonzalezgonzalez2021}. El desarrollo y la fecundidad del ácaro
+varían con la temperatura y la planta hospedera \cite{praslicka2004}. Por ello,
+el microclima del invernadero es un componente pertinente del monitoreo, aunque
+una lectura de temperatura o humedad relativa no confirma, por sí sola, la
+presencia de la plaga.
+
+El seguimiento agronómico incluye la inspección de hojas y el muestreo para
+reconocer la presencia de ácaros \cite{ucipm2023}. También se han estudiado
+métodos de extracción y conteo en otros cultivos
+\cite{extractionTechniques2017,macmillan2015}. Estas tareas requieren tiempo,
+personal y una frecuencia de observación adecuada. El problema que motiva este
+trabajo no es prescindir del criterio agronómico, sino explorar cómo apoyar un
+seguimiento oportuno y contextualizado de las plantas madre sin depender
+exclusivamente de inspecciones puntuales.
+
+Los antecedentes tecnológicos abordan objetivos distintos: algunos identifican
+daño foliar, mientras que otros buscan detectar directamente los ácaros
+\cite{nieuwenhuizen2020,zhou2023}. La detección de síntomas no equivale a la
+identificación del organismo, y el desempeño obtenido en un cultivo o conjunto
+de imágenes no demuestra su transferencia al invernadero de interés. La
+variabilidad de iluminación, la oclusión por follaje y las condiciones de
+adquisición deben considerarse al diseñar y evaluar la solución
+\cite{jelali2024}.
+
+Además de la percepción visual, se requiere estudiar cómo relacionar las
+lecturas ambientales con información del invernadero y conocimiento experto.
+Las ontologías constituyen una alternativa para representar ese contexto,
+como muestran aplicaciones en otros cultivos \cite{umar2024ontology}. A su
+vez, las restricciones de conectividad y recursos computacionales motivan
+examinar el procesamiento local, sin asumir de antemano autonomía energética
+ni funcionamiento continuo \cite{yu2025}. Así, el problema de investigación
+consiste en integrar observación visual, monitoreo ambiental y conocimiento
+agronómico, y evaluar su utilidad para detectar la plaga en el escenario local.
 
 \subsection{Pregunta de investigación}
 \label{subsec:pregunta-investigacion}
 
-\textit{[Formular la pregunta de investigación que orienta el proyecto.]}
+¿Cómo detectar de forma temprana la presencia de \textit{Tetranychus urticae}
+en plantas madre de cítricos cultivadas bajo condiciones de invernadero en
+viveros de la zona rural de Popayán, Cauca?
+
+Como hipótesis de trabajo, se plantea que un sistema cognitivo de monitoreo
+basado en tecnologías de la agroindustria 4.0 podría facilitar la detección
+temprana de la plaga viva en el cultivo y apoyar intervenciones agronómicas
+oportunas. Esta hipótesis deberá contrastarse mediante la evaluación del
+prototipo; no constituye un resultado demostrado.
 
 \subsection{Justificación}
 \label{sec:justificacion}
 
-\textit{[¿Por qué es importante este trabajo? Impacto académico, económico y social.]}
+La protección de las plantas madre contribuye a preservar el material de
+propagación y la inversión asociada a su producción. El monitoreo oportuno
+puede aportar información para decidir medidas de manejo de plagas, dentro de
+las recomendaciones agronómicas aplicables a los cítricos
+\cite{ica2019resolucion,dimasi_inta}. Se espera que una herramienta de apoyo a
+la inspección facilite la identificación de situaciones que requieran atención
+experta. No se presupone una reducción del uso de acaricidas ni de las pérdidas
+económicas: esos beneficios requerirían evidencia específica y una evaluación
+del manejo realizado.
+
+Desde la perspectiva tecnológica, la propuesta busca relacionar tres fuentes
+de información: series temporales de sensores IoT, imágenes de las plantas y
+conocimiento experto. La representación explícita de entidades como la planta,
+su ubicación y las condiciones del invernadero puede aportar contexto a las
+observaciones \cite{umar2024ontology}. La ejecución local se estudiará como
+alternativa para reducir la dependencia de una conexión permanente a servicios
+remotos, considerando los compromisos entre capacidad de procesamiento,
+comunicaciones y consumo de recursos \cite{yu2025}.
+
+En el ámbito académico, el trabajo articula conocimientos de Ingeniería
+Electrónica y de Telecomunicaciones en instrumentación, hardware embebido,
+aprendizaje automático y representación del conocimiento. Su pertinencia local
+radica en orientar el diseño hacia las condiciones de viveros de la zona rural
+de Popayán y en incorporar la participación de expertos agronómicos. El alcance
+propuesto es desarrollar y evaluar un prototipo de apoyo al monitoreo, no
+sustituir el diagnóstico especializado ni automatizar decisiones de control
+fitosanitario sin validación.
 
 \section{Objetivos}
 \label{sec:objetivos}
@@ -38,24 +121,89 @@ existe en el monitoreo de temperatura y humedad relativa para la detección de
 \subsection{Objetivo general}
 \label{subsec:obj-general}
 
-\textit{[Enunciar el objetivo general en una frase.]}
+Desarrollar un sistema cognitivo para el monitoreo y la detección temprana de
+la araña \textit{Tetranychus urticae} en plantas madre de cítricos, ubicadas en
+viveros bajo cubierta en la región de la zona rural de Popayán del departamento
+del Cauca.
 
 \subsection{Objetivos específicos}
 \label{subsec:obj-especificos}
 
 \begin{enumerate}
-    \item \textit{[Objetivo específico 1. Ej.: diseñar una ontología del dominio del invernadero.]}
-    \item \textit{[Objetivo específico 2.]}
-    \item \textit{[Objetivo específico 3.]}
+    \item Caracterizar el ciclo biológico de la araña \textit{Tetranychus urticae}
+    en plantas madre de cítricos bajo cubierta, para identificar la presencia y
+    sus efectos visibles en las plantas.
+    \item Diseñar la arquitectura del sistema cognitivo de monitoreo y detección
+    precisa de la araña usando la caracterización.
+    \item Evaluar mediante un prototipo la confiabilidad del sistema cognitivo y
+    su viabilidad para la detección directa de la plaga en condiciones de
+    invernadero con procesamiento local.
 \end{enumerate}
 
 \section{Metodología}
 \label{sec:metodologia}
 
-\textit{[Describir el enfoque de investigación, las fases del proyecto, las técnicas
-de recolección y análisis de datos, el alcance y las limitaciones del estudio.]}
+La investigación se plantea como un desarrollo tecnológico con evaluación
+experimental de un prototipo. La gestión seguirá las directrices de la guía
+del cuerpo de conocimientos para la dirección de proyectos (PMBOK), mediante
+paquetes de trabajo para organizar y supervisar las actividades
+\cite{pmi2017pmbok}. Para el componente de aprendizaje automático se adoptará
+CRISP-ML(Q), un modelo de proceso con aseguramiento de la calidad
+\cite{studer2021crispml}. El diseño de la instrumentación y las comunicaciones
+tomará como referencia marcos de monitoreo y control para agricultura
+inteligente con IoT \cite{senoo2023iot}. Estos referentes orientarán el trabajo;
+su adopción no implica que el sistema esté implementado o validado.
+
+Las actividades previstas se organizan en cuatro fases, correspondientes a los
+paquetes de trabajo del anteproyecto:
+\begin{enumerate}
+    \item \textbf{Caracterización del entorno y levantamiento del conocimiento.}
+    Se ampliará la revisión inicial de literatura y se realizarán observaciones
+    en plantas madre y entrevistas con expertos para caracterizar el hábitat,
+    el ciclo biológico y los efectos visibles de la plaga. Se prevé recolectar
+    imágenes y lecturas de temperatura y humedad relativa, junto con información
+    del contexto de adquisición, para estructurar los datos y la base de
+    conocimiento agrícola.
+    \item \textbf{Diseño de la arquitectura cognitiva.}
+    Se desarrollará la representación del conocimiento y se definirán los
+    componentes de adquisición, detección y procesamiento local. El diseño
+    contemplará la integración de los modelos de detección con las lecturas
+    ambientales y el conocimiento experto, a partir de la caracterización.
+    \item \textbf{Integración y evaluación experimental del prototipo.}
+    Se implementarán los componentes físicos y computacionales y se definirá
+    un protocolo de pruebas antes de la evaluación. Se prevén ensayos de
+    laboratorio sobre interoperabilidad y consumo de recursos, seguidos de
+    pruebas en el invernadero. Se registrarán y analizarán los datos para
+    evaluar la confiabilidad y viabilidad de la detección directa y orientar
+    ajustes técnicos del prototipo.
+    \item \textbf{Documentación y divulgación.}
+    Se documentarán el proceso de diseño, los datos y las condiciones de
+    evaluación. Cuando se disponga de resultados, se analizarán sus alcances y
+    limitaciones para elaborar la monografía y un artículo de investigación.
+\end{enumerate}
+
+Antes de ejecutar las pruebas deberán precisarse la unidad de muestreo, el
+procedimiento de identificación de referencia con apoyo experto, las métricas
+y los criterios de aceptación. También deberá establecerse una definición
+operativa de detección temprana que permita distinguir la observación del
+ácaro de la inferencia de estrés o daño foliar. El tamaño y la composición del
+conjunto de datos, las condiciones de iluminación y la disponibilidad de
+plantas y especialistas limitarán el alcance de la evaluación. Los resultados
+que se obtengan no podrán generalizarse a otros viveros o cultivos sin pruebas
+adicionales.
 
 \section{Estructura del documento}
 \label{sec:estructura}
 
-\textit{[Breve descripción de cómo está organizado el documento (capítulo por capítulo).]}
+El capítulo~\ref{cap:introduccion} presenta el problema, la pregunta de
+investigación, la justificación, los objetivos y la metodología prevista.
+El capítulo~\ref{cap:estado-del-arte} reúne el marco conceptual y una revisión
+inicial de antecedentes, brechas y aportes propuestos. El
+capítulo~\ref{cap:necesidades-monitoreo} se destina a la caracterización de las
+necesidades de monitoreo de temperatura y humedad relativa relacionadas con
+la plaga, y el capítulo~\ref{cap:arquitectura}, al diseño de la arquitectura del
+sistema. El capítulo~\ref{cap:pruebas-implementacion-evaluacion} contempla el
+plan de pruebas, la implementación y la evaluación del prototipo. Los
+capítulos~\ref{cap:resultados} y~\ref{cap:conclusiones} se reservan para el
+análisis de los resultados que se obtengan y para las conclusiones y trabajos
+futuros, respectivamente.

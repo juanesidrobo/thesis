@@ -5,37 +5,253 @@
 \chapter{Revisión de literatura y trabajos relacionados}
 \label{cap:estado-del-arte}
 
-\textit{[Este capítulo resume la literatura relacionada. Usa citas con \texttt{\textbackslash cite\{clave\}}
-y añade las referencias a \texttt{bibliografia/referencias.bib}.]}
+Este capítulo integra una revisión inicial de la literatura reunida en el
+anteproyecto. Su propósito es delimitar los conceptos y antecedentes que
+orientan el diseño de un sistema cognitivo para el monitoreo y la detección
+de \textit{Tetranychus urticae} en plantas madre de cítricos bajo cubierta.
+La síntesis distingue entre detección del organismo, identificación de daño
+foliar y monitoreo de condiciones ambientales, así como entre resultados
+reportados por otros autores y capacidades que este proyecto propone evaluar.
 
 \section{Marco conceptual}
 \label{sec:marco-conceptual}
 
-\textit{[Definir los conceptos que sustentan la propuesta: cítricos, invernaderos,
-\textit{Tetranychus urticae}, temperatura, humedad relativa, instrumentación e IoT.
-Presentar las bases de ontologías y representación del conocimiento que sean
-pertinentes para el proyecto.]}
+\textbf{Cítricos, plantas madre y cultivo bajo cubierta.}
+Los cítricos comprenden cultivos cuyo desarrollo, floración y fructificación
+dependen de procesos fisiológicos y de las condiciones de manejo
+\cite{gill2023citrus}. En los viveros, las plantas madre son una fuente de
+material para la propagación, por lo que su condición sanitaria merece
+seguimiento. El marco colombiano para la producción de material de propagación
+y los antecedentes de saneamiento de cítricos permiten situar esta necesidad
+\cite{ica2019resolucion,citrusCenter2012}. Para este trabajo, el invernadero
+constituye el entorno físico de observación; sus condiciones deberán
+caracterizarse y no se asumirán homogéneas por tratarse de un espacio cubierto.
+
+\textbf{Plaga, síntomas y detección temprana.}
+\textit{Tetranychus urticae} es un ácaro fitófago, no un insecto. Su interacción
+con los cítricos puede producir daño y respuestas defensivas que dependen del
+hospedero \cite{mesa2012acaros,agut2015}. La detección directa busca reconocer
+el organismo en la observación, mientras que la detección indirecta identifica
+señales de daño o estrés de la planta. Los trabajos sobre imágenes de hojas de
+cítricos y detección de daño en tomate ilustran el interés del segundo enfoque
+\cite{gonzalezgonzalez2021,nieuwenhuizen2020}; la detección de ácaros en fresa
+representa un antecedente del primero \cite{zhou2023}. En el proyecto, la
+detección temprana será una propiedad por evaluar mediante un criterio temporal
+y una referencia agronómica explícitos, no un sinónimo de clasificación visual
+correcta ni una consecuencia automática de medir el microclima.
+
+\textbf{Temperatura, humedad relativa e instrumentación.}
+La temperatura describe el estado térmico del ambiente y la humedad relativa
+expresa la relación entre el vapor de agua presente y la saturación a esa
+temperatura. Ambas variables forman parte del contexto ambiental que se propone
+registrar. La influencia de la temperatura y del hospedero sobre el desarrollo
+y la fecundidad de \textit{T.~urticae} justifica estudiar su relación con las
+observaciones de la plaga \cite{praslicka2004}. Las asociaciones o reglas que
+se utilicen deberán tener respaldo agronómico; no se establecen aquí umbrales
+universales de presencia, daño o intervención. La instrumentación deberá
+considerar ubicación de sensores, calidad de las lecturas y correspondencia
+temporal con las imágenes, de acuerdo con las necesidades de monitoreo.
+
+\textbf{IoT y procesamiento local.}
+El Internet de las cosas (IoT) permite integrar dispositivos de adquisición,
+comunicación y procesamiento para observar variables del cultivo
+\cite{senoo2023iot}. La literatura incluye soluciones de monitoreo de cítricos
+que combinan IoT y procesamiento de imágenes mediante comunicaciones LoRa
+(\textit{Long Range}) \cite{quispe2024lora}. El procesamiento local o
+\textit{edge computing} sitúa parte del análisis cerca de la fuente de datos;
+su conveniencia depende de los recursos disponibles y de la distribución de
+tareas entre dispositivos, nodos locales y servicios remotos \cite{yu2025}.
+No implica por sí mismo independencia energética ni eliminación de todas las
+necesidades de comunicación.
+
+\textbf{Sistema cognitivo y representación del conocimiento.}
+En esta investigación, el término sistema cognitivo designa la integración
+propuesta de percepción visual, lecturas ambientales y conocimiento experto
+para interpretar observaciones del cultivo. Una ontología permite representar
+de forma explícita conceptos y relaciones del dominio, por ejemplo entre
+plantas, ubicaciones, observaciones y condiciones ambientales. El sistema
+ontológico de recomendación de prácticas en melón constituye un antecedente
+de este enfoque \cite{umar2024ontology}. Su aplicación a cítricos y ácaros
+exigirá construir y validar el conocimiento específico. La representación
+semántica podrá facilitar la trazabilidad de reglas e inferencias, pero no
+garantiza por sí sola la exactitud de la detección visual.
 
 \section{Estado del arte}
 \label{sec:estado-del-arte}
 
-\textit{[Describir la búsqueda y selección de literatura sobre monitoreo ambiental,
-agricultura de precisión y detección de la plaga. Incorporar únicamente referencias
-verificadas en la bibliografía.]}
+La revisión toma como punto de partida las fuentes bibliográficas del
+anteproyecto sobre ácaros, detección visual, monitoreo ambiental, representación
+del conocimiento y procesamiento local. Se trata de una síntesis narrativa
+inicial, no de una revisión sistemática reproducible ni exhaustiva. El
+anteproyecto menciona consultas en Scopus, ScienceDirect y Web of Science;
+sin embargo, para reproducir la selección se requiere consolidar las fechas,
+las consultas por base, los registros recuperados y las decisiones de
+inclusión y exclusión.
+
+Como antecedente documental, la expresión de búsqueda consignada fue:
+\begin{quote}
+\shorthandoff{"}
+\small\ttfamily\raggedright
+(("Tetranychus urticae" OR "Two-spotted spider mite") AND
+("cognitive system" OR "knowledge-based system" OR "Plant stress") AND
+("Detection" OR "Classification" OR "Identification")) OR
+(("image processing") AND (plagas OR acaros OR pest) AND (citricos OR citrus))
+\end{quote}
+Esta expresión se conserva como punto de partida para futuras consultas, no
+como evidencia de una búsqueda ejecutada y auditada en esta versión. La
+discusión incorpora fuentes agronómicas y normativas, estudios tecnológicos y
+revisiones, distinguiendo su función y contexto. No se trasladan conteos de
+selección ni se atribuye a las revisiones secundarias una validación
+experimental propia. La comparación es cualitativa: no se ordenan modelos por
+desempeño cuando sus datos, tareas y condiciones no son equivalentes.
 
 \subsection{Trabajos relacionados}
 \label{subsec:trabajos-relacionados}
 
-\textit{[Comparar los trabajos seleccionados: objetivos, arquitecturas, sensores,
-protocolos, métodos de análisis y resultados reportados.]}
+\textbf{Detección visual del organismo y del daño.}
+González-González y colaboradores estudian la detección asociada a
+\textit{T.~urticae} en hojas de cítricos mediante imágenes de color e imágenes
+hiperespectrales en el visible e infrarrojo cercano (VIS/NIR)
+\cite{gonzalezgonzalez2021}. Nieuwenhuizen y colaboradores abordan
+explícitamente la detección automatizada del daño causado por ácaros en hojas
+de tomate en invernaderos \cite{nieuwenhuizen2020}. Por su parte, Neto y
+colaboradores investigan la detección temprana de estrés por ácaros en hibisco
+mediante imágenes hiperespectrales y aprendizaje automático
+\cite{neto2026early}. Estos antecedentes son relevantes para estudiar señales
+de infestación, pero no deben presentarse indistintamente como identificación
+directa del ácaro vivo ni como validación en plantas madre de cítricos.
+
+Como antecedente de detección del organismo, Zhou y colaboradores estudian
+ácaros de dos manchas y ácaros depredadores en fresa mediante aprendizaje
+profundo \cite{zhou2023}. Wiseman y colaboradores abordan la detección y
+cuantificación de estadios de \textit{T.~urticae} en ensayos \textit{in vitro}
+\cite{wiseman2025invitro}. Estos trabajos muestran que existen aproximaciones
+directas y evitan formular la brecha como una ausencia absoluta de detección
+automatizada. Sus contextos, no obstante, son distintos del invernadero
+objetivo y requieren examinar la transferencia del método.
+
+Para objetos pequeños, Li y Lee proponen una combinación de Cascade R-CNN
+(red neuronal convolucional basada en regiones) y Swin Transformer
+\cite{li2022cascade}. Valderrama Solis y colaboradores estudian aprendizaje
+automático y procesamiento de imágenes para detectar
+\textit{Aleurothrixus floccosus} \cite{valderrama2025aleurothrixus}.
+Ambos constituyen referencias metodológicas para la percepción de plagas;
+sin embargo, la morfología de las especies, la resolución de las imágenes y
+los escenarios de adquisición condicionan su aplicabilidad a
+\textit{T.~urticae}. No se adopta una arquitectura definitiva a partir de esta
+comparación inicial.
+
+\textbf{Condiciones de adquisición y transferencia al cultivo.}
+La revisión de Jelali se centra en estudios de enfermedades y plagas de tomate
+que utilizan conjuntos de datos de campo \cite{jelali2024}. La revisión de
+Mallick y colaboradores amplía el panorama de técnicas de aprendizaje profundo
+para enfermedades y plagas \cite{mallick2025review}. Estos trabajos sirven
+para orientar el examen de datos y validación, pero no permiten afirmar que
+todos los modelos fallen fuera del laboratorio.
+
+Los estudios de Çetiner sobre clasificación de enfermedades en cítricos y de
+Wadhwa y Malik sobre modelos híbridos para enfermedades de múltiples cultivos
+son antecedentes para el análisis de imágenes y la generalización
+\cite{cetiner2022citrus,wadhwa2026hybrid}. Su tarea no equivale a localizar
+ácaros. Asimismo, Nansen y colaboradores estudian condiciones de adquisición
+hiperespectral, incluida la captura nocturna y la agrupación espacial de
+píxeles, para observar estrés biótico \cite{nansen2024methods}. Su pertinencia
+para el prototipo deberá valorarse según instrumentación, operación y costo,
+sin descartar o adoptar esa tecnología antes de una comparación documentada.
+
+\textbf{Monitoreo, comunicaciones y ejecución local.}
+Quispe-Vilca y colaboradores integran IoT y procesamiento de imágenes en una
+solución de monitoreo de cítricos basada en LoRa \cite{quispe2024lora}. Este
+trabajo es un antecedente cercano para la articulación entre adquisición y
+comunicaciones; no se presupone que sus características coincidan con los
+requisitos del vivero objetivo. Senoo y colaboradores ofrecen un marco de
+monitoreo y control IoT aplicado a agricultura inteligente
+\cite{senoo2023iot}, mientras que Yu y colaboradores analizan arquitecturas
+colaborativas entre nube, nodos de procesamiento local y dispositivos
+\cite{yu2025}. En conjunto, permiten plantear decisiones sobre dónde adquirir,
+transmitir y procesar cada tipo de dato.
+
+Wang y colaboradores presentan un sistema portátil de detección de plagas de
+cítricos \cite{wang2021portable}. La aplicación web de da Cunha y colaboradores
+para detectar psílidos constituye otro antecedente de acceso a herramientas
+de análisis visual \cite{cunha2024psyllid}. Estos desarrollos ilustran
+modalidades de despliegue diferentes; el carácter portátil o web no demuestra
+por sí mismo inferencia local ni autonomía. La selección de hardware y modelos
+para este proyecto deberá basarse en mediciones de latencia, memoria y consumo
+de recursos bajo condiciones de uso definidas.
+
+\textbf{Conocimiento experto e interpretación contextual.}
+Umar y colaboradores presentan un sistema basado en ontologías para recomendar
+prácticas de cultivo de melón \cite{umar2024ontology}. Este antecedente aporta
+una referencia para organizar conocimiento del dominio, aunque no demuestra
+la detección de ácaros en cítricos. Ilodibe y colaboradores estudian aprendizaje
+profundo explicable e inferencia local para clasificar severidad de trips en
+fresa \cite{ilodibe2026thrips}. La explicabilidad de una clasificación y el
+razonamiento con conocimiento agronómico son capacidades relacionadas, pero
+distintas. El proyecto propone estudiar su articulación con las observaciones
+ambientales sin asumir que los antecedentes carezcan de toda interpretación
+o integración contextual.
 
 \subsection{Brechas existentes}
 \label{subsec:brechas}
 
-\textit{[Identificar limitaciones y vacíos sustentados en la revisión de literatura.]}
+La lectura inicial permite formular necesidades de investigación para el
+escenario del proyecto, no demostrar vacíos universales de la literatura.
+Estas necesidades se organizan en cuatro dimensiones:
+\begin{itemize}
+    \item \textbf{Detección directa y oportunidad de la observación.}
+    Los estudios de daño o estrés y los de detección del organismo resuelven
+    tareas diferentes \cite{nieuwenhuizen2020,neto2026early,zhou2023}.
+    Se requiere establecer cómo reconocer directamente la plaga en plantas
+    madre de cítricos y cómo evaluar que esa observación sea temprana con
+    respecto a un criterio agronómico explícito.
+    \item \textbf{Evaluación en el entorno objetivo.}
+    Los antecedentes incluyen otros hospederos y ensayos \textit{in vitro}
+    \cite{zhou2023,wiseman2025invitro}. La revisión sobre datos de campo
+    subraya la pertinencia de considerar el entorno de adquisición
+    \cite{jelali2024}. Queda por evaluar el desempeño en las condiciones
+    concretas del invernadero, con su iluminación, follaje y prácticas de
+    operación, sin inferirlo de resultados externos.
+    \item \textbf{Viabilidad del procesamiento local.}
+    Los sistemas portátiles y las arquitecturas distribuidas ofrecen
+    alternativas de despliegue \cite{wang2021portable,yu2025}. Se necesita
+    cuantificar los compromisos entre desempeño de detección, latencia,
+    memoria, consumo y conectividad para el hardware que se seleccione.
+    \item \textbf{Integración del contexto agronómico.}
+    La combinación de IoT e imágenes y los sistemas basados en ontologías
+    aportan antecedentes complementarios
+    \cite{quispe2024lora,umar2024ontology}. Se propone estudiar cómo vincular
+    imágenes, registros ambientales y conocimiento experto específico de
+    \textit{T.~urticae}, conservando la trazabilidad de las observaciones y
+    evitando confundir condiciones favorables con presencia confirmada.
+\end{itemize}
+
+Estas dimensiones orientarán la ampliación de la revisión y el diseño del
+protocolo experimental. No se asignan capacidades binarias a los trabajos ni
+al sistema propuesto sin evidencia suficiente sobre sus métodos y condiciones
+de evaluación.
 
 \subsection{Aportes del proyecto}
 \label{subsec:aportes-proyecto}
 
-\textit{[Explicar los aportes propuestos frente a las brechas identificadas, sin
-presentarlos como resultados ya demostrados.]}
+El trabajo propone desarrollar un sistema cognitivo para el monitoreo y la
+detección de \textit{Tetranychus urticae} en plantas madre de cítricos bajo
+cubierta. Los aportes previstos, sujetos a implementación y evaluación, son:
+\begin{itemize}
+    \item Una caracterización del entorno y del conocimiento agronómico
+    pertinente para observar la plaga, acompañada de un conjunto de datos
+    propio con imágenes, lecturas ambientales y contexto de adquisición.
+    \item Una arquitectura que relacione percepción visual, monitoreo de
+    temperatura y humedad relativa y representación explícita del
+    conocimiento, orientada al procesamiento local.
+    \item Un prototipo y una evaluación documentada de su confiabilidad y
+    viabilidad para la detección directa en condiciones de invernadero,
+    incluyendo las limitaciones de los datos y los recursos disponibles.
+\end{itemize}
+
+La contribución esperada reside en estudiar esa integración en el contexto
+local, no en afirmar prioridad absoluta frente a todos los sistemas existentes.
+La mejora de la oportunidad de detección, la utilidad del conocimiento experto
+y la viabilidad operativa deberán sustentarse con pruebas. No se consideran
+demostradas la autonomía energética, la reducción de daños ni la superioridad
+frente a otros métodos en esta revisión inicial.

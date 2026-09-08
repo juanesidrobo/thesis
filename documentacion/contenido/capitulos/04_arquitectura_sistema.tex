@@ -2,7 +2,26 @@
 \chapter{Arquitectura del sistema}
 \label{cap:arquitectura}
 
-\textit{[Describir la arquitectura propuesta: componentes de hardware y software,
-sensores, adquisición, comunicaciones, almacenamiento, procesamiento y
-visualización. Incorporar diagramas y justificar las decisiones de diseño.
-Las subsecciones se definirán posteriormente.]}
+La arquitectura propuesta en el anteproyecto integra tres fuentes de información:
+mediciones ambientales, percepción visual y conocimiento experto del cultivo.
+Se busca relacionar los registros temporales de los sensores con las observaciones
+de la plaga y con el contexto del invernadero. La representación semántica del
+conocimiento ofrece una base para estudiar esta integración
+\cite{umar2024ontology}.
+
+El diseño contempla la adquisición de temperatura y humedad relativa, la captura
+de imágenes y su procesamiento, y una base de conocimiento que represente las
+plantas, su ubicación y las relaciones agronómicas pertinentes. La integración
+lógica deberá permitir conservar la procedencia de las observaciones y distinguir
+las mediciones de las inferencias del sistema.
+
+Se propone ejecutar el procesamiento localmente para reducir la dependencia de
+la conectividad externa. La selección del hardware, los modelos de detección y
+los mecanismos de comunicación deberá justificarse a partir de los requisitos
+del capítulo anterior y de las restricciones de recursos. La autonomía y el
+desempeño de esta configuración son propiedades por evaluar, no resultados
+demostrados.
+
+\textit{[Pendiente: documentar los diagramas, interfaces, componentes seleccionados,
+modelo de conocimiento y decisiones de diseño. Esta descripción corresponde a
+la arquitectura prevista en el anteproyecto, no a una implementación validada.]}

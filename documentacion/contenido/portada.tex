@@ -6,25 +6,32 @@
     \centering
     \thispagestyle{empty}
 
-    \vspace*{1.5cm}
-    {\Large\bfseries \universidad\par}
-    \vspace{0.4cm}
-    {\large \facultad\par}
-    {\large \programa\par}
+    \setstretch{1.2}
+    \setlength{\parskip}{0pt}
 
-    \vspace{3.0cm}
-    {\LARGE\bfseries \titulo\par}
-    \vspace{1.5cm}
-
+    {\bfseries\MakeUppercase{\titulo}\par}
     \vfill
-    {\large Presentado por:\par}
-    {\large\bfseries \autor\par}
-    \vspace{0.8cm}
-
-    {\large Dirigido por:\par}
-    {\large\bfseries \director\par}
-
+    \includegraphics[width=4cm]{contenido/figuras/escudo_unicauca.jpg}\par
     \vfill
-    {\large \ciudad, \pais\par}
-    {\large \anio\par}
+
+    {\itshape \tipoDocumento\par}
+    Modalidad: \modalidad\par
+    \vfill
+
+    {\bfseries \primeraAutora\par}
+    \codigoPrimeraAutora\par
+    \vspace{0.3cm}
+    {\bfseries \segundoAutor\par}
+    \codigoSegundoAutor\par
+    \vfill
+
+    {\itshape Director: \director\par}
+    {\itshape Codirector: \codirector\par}
+    \vfill
+
+    \universidad\par
+    {\bfseries \facultad\par}
+    {\bfseries \departamento\par}
+    \lineaInvestigacion\par
+    \ciudad, \anio\par
 \end{titlepage}
